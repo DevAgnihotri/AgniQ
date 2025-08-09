@@ -21,7 +21,7 @@ export class Step1Welcome {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between items-center h-16">
             <div class="flex items-center">
-              <h1 class="text-2xl font-cyber font-bold text-cyber-red glitch-text" data-text="QUANTUM_EXPERIENCE">QUANTUM_EXPERIENCE</h1>
+              <h1 class="text-2xl font-cyber font-bold text-cyber-red glitch-text" data-text="AgniQ">AgniQ</h1>
             </div>
             <div class="flex items-center space-x-4">
               <span class="text-cyber-green font-mono text-sm">STEP_01_ACTIVE</span>
@@ -36,21 +36,22 @@ export class Step1Welcome {
         <div class="max-w-6xl mx-auto text-center px-4">
           <!-- Main Titles -->
           <div class="mb-16">
-            <h1 class="main-title font-cyber font-black mb-6 glitch-text" data-text="QUANTUM">QUANTUM</h1>
-            <h2 class="main-title font-cyber font-black mb-12 text-cyber-blue glitch-text" data-text="COMPUTING">COMPUTING</h2>
+            <h1 class="main-title font-cyber font-black mb-6 glitch-text" data-text="AgniQ">AgniQ</h1>
+            <h2 class="main-title font-cyber font-black mb-12 text-cyber-blue glitch-text" data-text="QUANTUM COMPUTING">QUANTUM COMPUTING</h2>
             
             <div class="section-header text-2xl md:text-3xl font-bold text-cyber-green mb-8">
-              A Progressive Cyberpunk Experience
+              A Progressive Cyberpunk Quantum Experience
             </div>
             
             <p class="typewriter text-lg md:text-xl text-gray-300 font-mono max-w-3xl mx-auto leading-relaxed">
-              Enter the quantum realm where reality bends to probability and computation transcends classical limits. 
-              Experience the future of computing through an immersive cyberpunk interface.
+              Welcome to AgniQ - where quantum mechanics meets cyberpunk aesthetics. 
+              Journey through the quantum realm where reality bends to probability and computation transcends classical limits. 
+              Experience the future of quantum computing through an immersive interactive interface.
             </p>
           </div>
 
           <!-- Feature Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             <div class="cyber-box p-6 hover:border-cyber-blue transition-colors duration-300">
               <div class="text-4xl mb-4">⚛️</div>
               <h3 class="text-xl font-cyber font-bold text-cyber-green mb-3">QUANTUM MECHANICS</h3>
@@ -68,6 +69,13 @@ export class Step1Welcome {
               <h3 class="text-xl font-cyber font-bold text-cyber-green mb-3">FUTURE APPLICATIONS</h3>
               <p class="text-gray-400 text-sm">Learn about quantum cryptography, drug discovery, and AI acceleration</p>
             </div>
+
+            <a href="./flowchart/index.html" target="_blank" class="cyber-box p-6 hover:border-cyber-pink transition-colors duration-300 cursor-pointer group">
+              <div class="text-4xl mb-4 group-hover:animate-pulse">📊</div>
+              <h3 class="text-xl font-cyber font-bold text-cyber-pink mb-3">QUANTUM FLOWCHART</h3>
+              <p class="text-gray-400 text-sm">Interactive quantum field visualization showing the complete quantum computation process</p>
+              <div class="mt-3 text-cyber-pink font-mono text-xs">Click to explore →</div>
+            </a>
           </div>
 
           <!-- Journey Steps Preview -->

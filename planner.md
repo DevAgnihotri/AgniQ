@@ -1,3 +1,5 @@
+fix step 4 and back step buttons ok.
+
 I want to make a progressize cyberpunk style qunatum computing experience ok so we'll do it step by step claude u have to develop each step one by one and also have to link these public folders to em ok dear now let's start.. it's a typescript tailwind project ok but it also uses html css and js files filders ok dear and p5js stuff too. now let's start.. with step 1 ok that's our landing page as i said it is progressive so we proceed one by one a cyberpunk styled with cyberpunk think cool font and some glitch effect ok.. use the css and theme in the cyberpunk folder and make the whole project something like that ok let's start.. by completel executing step 1 of the application
 
 

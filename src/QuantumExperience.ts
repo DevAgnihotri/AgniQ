@@ -10,6 +10,7 @@ import { StepManager } from './components/StepManager.js';
 import { Step1Welcome } from './steps/Step1Welcome.js';
 import { Step2QuantumBasics } from './steps/Step2QuantumBasics.js';
 import { Step3BlochSphere } from './steps/Step3BlochSphere.js';
+import { Step4MeasurementCollapse } from './steps/Step4MeasurementCollapse.js';
 
 export class QuantumExperience {
   private config: QuantumExperienceConfig;
@@ -28,6 +29,7 @@ export class QuantumExperience {
   private step1!: Step1Welcome;
   private step2!: Step2QuantumBasics;
   private step3!: Step3BlochSphere;
+  private step4!: Step4MeasurementCollapse;
 
   constructor(config: Partial<QuantumExperienceConfig> = {}) {
     this.config = {
@@ -83,6 +85,7 @@ export class QuantumExperience {
     this.step1 = new Step1Welcome();
     this.step2 = new Step2QuantumBasics();
     this.step3 = new Step3BlochSphere();
+    this.step4 = new Step4MeasurementCollapse();
     
     // Setup step transition listeners
     window.addEventListener('stepTransition', (e: any) => {
@@ -192,6 +195,10 @@ export class QuantumExperience {
         this.step3.initialize();
         this.step3.show();
         break;
+      case 4:
+        this.step4.initialize();
+        this.step4.show();
+        break;
       default:
         console.warn(`Step ${stepNumber} not implemented yet`);
         break;
@@ -209,6 +216,9 @@ export class QuantumExperience {
       case 3:
         this.step3.hide();
         break;
+      case 4:
+        this.step4.hide();
+        break;
     }
   }
 
@@ -221,6 +231,7 @@ export class QuantumExperience {
     this.step1?.destroy();
     this.step2?.destroy();
     this.step3?.destroy();
+    this.step4?.destroy();
   }
 
   public getConfig(): QuantumExperienceConfig {

@@ -2,17 +2,234 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Animated Flow Chart to demo animating viewBox</title>
-  <link href='https://fonts.googleapis.com/css?family=Dosis:400,600' rel='stylesheet' type='text/css'><link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+  <title>AgniQ - Quantum Field Visualization Flowchart</title>
+  <link href='https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400&family=Orbitron:wght@400;700;900&display=swap' rel='stylesheet'>
 <link rel="stylesheet" href="./style.css">
-
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<svg id="graphic" viewBox="1183 594 271 267" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title">
-  <title id="title">
-    Graphic Flow Chart
-  </title>
+<!-- Quantum Field Visualization Flowchart -->
+<div class="quantum-container">
+  <header class="quantum-header">
+    <h1 class="quantum-title">AgniQ Quantum Field Visualization</h1>
+    <div class="quantum-subtitle">Interactive Quantum Mechanics Flow</div>
+  </header>
+
+  <svg id="quantum-graphic" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" aria-labelledby="quantum-title">
+    <title id="quantum-title">Quantum Field Visualization Flowchart</title>
+    
+    <!-- Background Quantum Grid -->
+    <defs>
+      <pattern id="quantumGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#39ff1420" stroke-width="1"/>
+      </pattern>
+      
+      <!-- Quantum Glow Effect -->
+      <filter id="quantumGlow">
+        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+        <feMerge> 
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      
+      <!-- Particle Effect -->
+      <filter id="particleGlow">
+        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+        <feMerge> 
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    
+    <!-- Quantum Grid Background -->
+    <rect width="100%" height="100%" fill="url(#quantumGrid)"/>
+    
+    <!-- Quantum States and Processes -->
+    
+    <!-- Initial Quantum State -->
+    <g id="quantum-start" class="quantum-node">
+      <circle cx="100" cy="100" r="40" fill="#16213e" stroke="#39ff14" stroke-width="3" filter="url(#quantumGlow)"/>
+      <text x="100" y="90" text-anchor="middle" fill="#39ff14" font-family="Orbitron" font-size="12" font-weight="700">INITIAL</text>
+      <text x="100" y="105" text-anchor="middle" fill="#39ff14" font-family="Orbitron" font-size="12" font-weight="700">|ψ₀⟩</text>
+      <text x="100" y="120" text-anchor="middle" fill="#00ff9f" font-family="Share Tech Mono" font-size="10">Quantum State</text>
+    </g>
+    
+    <!-- Superposition -->
+    <g id="superposition" class="quantum-node">
+      <rect x="250" y="60" width="120" height="80" rx="15" fill="#16213e" stroke="#00ff9f" stroke-width="3" filter="url(#quantumGlow)"/>
+      <text x="310" y="85" text-anchor="middle" fill="#00ff9f" font-family="Orbitron" font-size="14" font-weight="700">SUPERPOSITION</text>
+      <text x="310" y="105" text-anchor="middle" fill="#39ff14" font-family="Share Tech Mono" font-size="11">α|0⟩ + β|1⟩</text>
+      <text x="310" y="125" text-anchor="middle" fill="#ff006e" font-family="Share Tech Mono" font-size="9">Multiple states</text>
+    </g>
+    
+    <!-- Quantum Gates -->
+    <g id="quantum-gates" class="quantum-node">
+      <polygon points="500,50 580,100 500,150 420,100" fill="#16213e" stroke="#ff006e" stroke-width="3" filter="url(#quantumGlow)"/>
+      <text x="500" y="95" text-anchor="middle" fill="#ff006e" font-family="Orbitron" font-size="12" font-weight="700">QUANTUM</text>
+      <text x="500" y="110" text-anchor="middle" fill="#ff006e" font-family="Orbitron" font-size="12" font-weight="700">GATES</text>
+      <text x="500" y="170" text-anchor="middle" fill="#00ff9f" font-family="Share Tech Mono" font-size="10">H, X, Y, Z, CNOT</text>
+    </g>
+    
+    <!-- Entanglement -->
+    <g id="entanglement" class="quantum-node">
+      <ellipse cx="750" cy="100" rx="80" ry="50" fill="#16213e" stroke="#ff6b35" stroke-width="3" filter="url(#quantumGlow)"/>
+      <text x="750" y="95" text-anchor="middle" fill="#ff6b35" font-family="Orbitron" font-size="13" font-weight="700">ENTANGLEMENT</text>
+      <text x="750" y="110" text-anchor="middle" fill="#39ff14" font-family="Share Tech Mono" font-size="10">|Φ⁺⟩ = (|00⟩+|11⟩)/√2</text>
+      <text x="750" y="170" text-anchor="middle" fill="#00ff9f" font-family="Share Tech Mono" font-size="9">Spooky action at distance</text>
+    </g>
+    
+    <!-- Measurement Decision -->
+    <g id="measurement-decision" class="quantum-node">
+      <polygon points="500,250 570,300 500,350 430,300" fill="#16213e" stroke="#f72585" stroke-width="3" filter="url(#quantumGlow)"/>
+      <text x="500" y="290" text-anchor="middle" fill="#f72585" font-family="Orbitron" font-size="11" font-weight="700">MEASURE?</text>
+      <text x="500" y="305" text-anchor="middle" fill="#f72585" font-family="Orbitron" font-size="11" font-weight="700">COLLAPSE?</text>
+      <text x="500" y="380" text-anchor="middle" fill="#00ff9f" font-family="Share Tech Mono" font-size="9">Born Rule</text>
+    </g>
+    
+    <!-- Quantum Collapse -->
+    <g id="quantum-collapse" class="quantum-node">
+      <rect x="250" y="450" width="120" height="80" rx="15" fill="#16213e" stroke="#f72585" stroke-width="3" filter="url(#quantumGlow)"/>
+      <text x="310" y="475" text-anchor="middle" fill="#f72585" font-family="Orbitron" font-size="12" font-weight="700">COLLAPSE</text>
+      <text x="310" y="495" text-anchor="middle" fill="#39ff14" font-family="Share Tech Mono" font-size="11">|0⟩ or |1⟩</text>
+      <text x="310" y="515" text-anchor="middle" fill="#ff006e" font-family="Share Tech Mono" font-size="9">Classical result</text>
+    </g>
+    
+    <!-- Quantum Field -->
+    <g id="quantum-field" class="quantum-node">
+      <rect x="650" y="450" width="140" height="80" rx="15" fill="#16213e" stroke="#7209b7" stroke-width="3" filter="url(#quantumGlow)"/>
+      <text x="720" y="475" text-anchor="middle" fill="#7209b7" font-family="Orbitron" font-size="12" font-weight="700">QUANTUM FIELD</text>
+      <text x="720" y="495" text-anchor="middle" fill="#39ff14" font-family="Share Tech Mono" font-size="10">∇²ψ - m²ψ = 0</text>
+      <text x="720" y="515" text-anchor="middle" fill="#00ff9f" font-family="Share Tech Mono" font-size="9">Field equations</text>
+    </g>
+    
+    <!-- Quantum Algorithm -->
+    <g id="quantum-algorithm" class="quantum-node">
+      <circle cx="950" cy="300" r="60" fill="#16213e" stroke="#4cc9f0" stroke-width="3" filter="url(#quantumGlow)"/>
+      <text x="950" y="285" text-anchor="middle" fill="#4cc9f0" font-family="Orbitron" font-size="11" font-weight="700">QUANTUM</text>
+      <text x="950" y="300" text-anchor="middle" fill="#4cc9f0" font-family="Orbitron" font-size="11" font-weight="700">ALGORITHM</text>
+      <text x="950" y="315" text-anchor="middle" fill="#4cc9f0" font-family="Orbitron" font-size="11" font-weight="700">EXECUTION</text>
+      <text x="950" y="380" text-anchor="middle" fill="#00ff9f" font-family="Share Tech Mono" font-size="9">Shor's, Grover's, etc.</text>
+    </g>
+    
+    <!-- Quantum Computer Output -->
+    <g id="quantum-output" class="quantum-node">
+      <rect x="850" y="500" width="140" height="80" rx="15" fill="#16213e" stroke="#39ff14" stroke-width="3" filter="url(#quantumGlow)"/>
+      <text x="920" y="525" text-anchor="middle" fill="#39ff14" font-family="Orbitron" font-size="12" font-weight="700">QUANTUM</text>
+      <text x="920" y="545" text-anchor="middle" fill="#39ff14" font-family="Orbitron" font-size="12" font-weight="700">COMPUTATION</text>
+      <text x="920" y="565" text-anchor="middle" fill="#00ff9f" font-family="Share Tech Mono" font-size="10">Classical output</text>
+    </g>
+    
+    <!-- Quantum Connections/Arrows -->
+    <g class="quantum-connections" fill="none" stroke-width="2">
+      <!-- Start to Superposition -->
+      <path d="M 140 100 L 250 100" stroke="#39ff14" marker-end="url(#arrowhead)"/>
+      
+      <!-- Superposition to Gates -->
+      <path d="M 370 100 L 420 100" stroke="#00ff9f" marker-end="url(#arrowhead)"/>
+      
+      <!-- Gates to Entanglement -->
+      <path d="M 580 100 L 670 100" stroke="#ff006e" marker-end="url(#arrowhead)"/>
+      
+      <!-- Gates to Measurement -->
+      <path d="M 500 150 L 500 250" stroke="#ff006e" marker-end="url(#arrowhead)"/>
+      
+      <!-- Measurement Yes - Collapse -->
+      <path d="M 430 300 L 310 450" stroke="#f72585" marker-end="url(#arrowhead)"/>
+      
+      <!-- Measurement No - Algorithm -->
+      <path d="M 570 300 L 890 300" stroke="#4cc9f0" marker-end="url(#arrowhead)"/>
+      
+      <!-- Entanglement to Field -->
+      <path d="M 750 150 L 720 450" stroke="#7209b7" marker-end="url(#arrowhead)"/>
+      
+      <!-- Algorithm to Output -->
+      <path d="M 950 360 L 920 500" stroke="#39ff14" marker-end="url(#arrowhead)"/>
+      
+      <!-- Field to Algorithm -->
+      <path d="M 790 490 L 890 330" stroke="#7209b7" marker-end="url(#arrowhead)"/>
+    </g>
+    
+    <!-- Arrow markers -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#39ff14"/>
+      </marker>
+    </defs>
+    
+    <!-- Decision Labels -->
+    <text x="360" y="380" fill="#f72585" font-family="Share Tech Mono" font-size="12" font-weight="bold">YES</text>
+    <text x="680" y="285" fill="#4cc9f0" font-family="Share Tech Mono" font-size="12" font-weight="bold">NO</text>
+    
+    <!-- Quantum Particles Animation -->
+    <g class="quantum-particles">
+      <circle cx="200" cy="200" r="3" fill="#39ff14" filter="url(#particleGlow)">
+        <animateMotion dur="8s" repeatCount="indefinite">
+          <path d="M 0 0 Q 100 -50 200 0 T 400 0"/>
+        </animateMotion>
+      </circle>
+      
+      <circle cx="600" cy="200" r="2" fill="#ff006e" filter="url(#particleGlow)">
+        <animateMotion dur="6s" repeatCount="indefinite">
+          <path d="M 0 0 Q -80 80 -160 0 T -320 0"/>
+        </animateMotion>
+      </circle>
+      
+      <circle cx="800" cy="350" r="2.5" fill="#00ff9f" filter="url(#particleGlow)">
+        <animateMotion dur="10s" repeatCount="indefinite">
+          <path d="M 0 0 Q 50 100 100 0 Q 150 -100 200 0"/>
+        </animateMotion>
+      </circle>
+    </g>
+    
+    <!-- Information Box -->
+    <g id="info-box" class="quantum-info">
+      <rect x="50" y="600" width="300" height="150" rx="10" fill="#0a0a0a" stroke="#39ff14" stroke-width="2" filter="url(#quantumGlow)"/>
+      <text x="200" y="625" text-anchor="middle" fill="#39ff14" font-family="Orbitron" font-size="16" font-weight="700">QUANTUM MECHANICS</text>
+      <text x="70" y="650" fill="#00ff9f" font-family="Share Tech Mono" font-size="11">• Superposition: Multiple states simultaneously</text>
+      <text x="70" y="670" fill="#00ff9f" font-family="Share Tech Mono" font-size="11">• Entanglement: Quantum correlation</text>
+      <text x="70" y="690" fill="#00ff9f" font-family="Share Tech Mono" font-size="11">• Measurement: Probabilistic collapse</text>
+      <text x="70" y="710" fill="#00ff9f" font-family="Share Tech Mono" font-size="11">• Quantum Gates: Unitary operations</text>
+      <text x="70" y="730" fill="#00ff9f" font-family="Share Tech Mono" font-size="11">• Quantum Fields: Fundamental reality</text>
+    </g>
+    
+    <!-- Quantum Equations -->
+    <g id="equations" class="quantum-equations">
+      <rect x="850" y="50" width="300" height="120" rx="10" fill="#0a0a0a" stroke="#ff006e" stroke-width="2" filter="url(#quantumGlow)"/>
+      <text x="1000" y="75" text-anchor="middle" fill="#ff006e" font-family="Orbitron" font-size="14" font-weight="700">QUANTUM EQUATIONS</text>
+      <text x="870" y="100" fill="#39ff14" font-family="Share Tech Mono" font-size="12">Schrödinger: iℏ∂ψ/∂t = Ĥψ</text>
+      <text x="870" y="120" fill="#39ff14" font-family="Share Tech Mono" font-size="12">Heisenberg: ΔxΔp ≥ ℏ/2</text>
+      <text x="870" y="140" fill="#39ff14" font-family="Share Tech Mono" font-size="12">Born Rule: P = |⟨φ|ψ⟩|²</text>
+      <text x="870" y="160" fill="#39ff14" font-family="Share Tech Mono" font-size="12">Field: ∇²ψ - m²ψ = 0</text>
+    </g>
+  </svg>
+
+  <footer class="quantum-footer">
+    <div class="footer-content">
+      <div class="quantum-stats">
+        <div class="stat-item">
+          <span class="stat-label">Quantum States:</span>
+          <span class="stat-value">∞</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Entangled Particles:</span>
+          <span class="stat-value">2ⁿ</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Computation Speed:</span>
+          <span class="stat-value">Exponential</span>
+        </div>
+      </div>
+      <div class="quantum-link">
+        <a href="../index.html" class="back-link">← Return to AgniQ Main</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="./script.js"></script>
+</body>
+</html>
   <g style="isolation:isolate" font-size="13.71" fill="#9ffcdf" font-family="Dosis" font-weight="700">
     <text transform="matrix(1.02 0 0 1 1593.2 773.1)" style="isolation:isolate">
       Y
