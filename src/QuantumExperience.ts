@@ -6,18 +6,28 @@ import { GlitchEffect } from './components/GlitchEffect.js';
 import { AudioSystem } from './components/AudioSystem.js';
 import { PerformanceMonitor } from './components/PerformanceMonitor.js';
 import { MatrixRain } from './components/MatrixRain.js';
+import { StepManager } from './components/StepManager.js';
+import { Step1Welcome } from './steps/Step1Welcome.js';
+import { Step2QuantumBasics } from './steps/Step2QuantumBasics.js';
+import { Step3BlochSphere } from './steps/Step3BlochSphere.js';
 
 export class QuantumExperience {
   private config: QuantumExperienceConfig;
   private preloader!: PreloaderComponent;
   private mainApp!: HTMLElement;
-  private continueBtn!: HTMLElement;
   private particlesContainer!: HTMLElement;
   private particleSystem!: ParticleSystem;
   private glitchEffect!: GlitchEffect;
   private audioSystem!: AudioSystem;
   private performanceMonitor!: PerformanceMonitor;
   private matrixRain!: MatrixRain;
+  private stepManager!: StepManager;
+  private currentStep: number = 1;
+  
+  // Step components
+  private step1!: Step1Welcome;
+  private step2!: Step2QuantumBasics;
+  private step3!: Step3BlochSphere;
 
   constructor(config: Partial<QuantumExperienceConfig> = {}) {
     this.config = {
@@ -30,16 +40,16 @@ export class QuantumExperience {
 
     this.initializeElements();
     this.initializeComponents();
+    this.initializeSteps();
     this.init();
   }
 
   private initializeElements(): void {
     this.preloader = new PreloaderComponent('preloader');
     this.mainApp = document.getElementById('main-app')!;
-    this.continueBtn = document.getElementById('continueBtn')!;
     this.particlesContainer = document.getElementById('particles-container')!;
 
-    if (!this.mainApp || !this.continueBtn || !this.particlesContainer) {
+    if (!this.mainApp) {
       throw new Error('Required DOM elements not found');
     }
   }
@@ -63,6 +73,21 @@ export class QuantumExperience {
     }
 
     this.matrixRain = new MatrixRain();
+    
+    this.stepManager = new StepManager((step: number) => {
+      this.handleStepTransition(step);
+    });
+  }
+
+  private initializeSteps(): void {
+    this.step1 = new Step1Welcome();
+    this.step2 = new Step2QuantumBasics();
+    this.step3 = new Step3BlochSphere();
+    
+    // Setup step transition listeners
+    window.addEventListener('stepTransition', (e: any) => {
+      this.transitionToStep(e.detail.step);
+    });
   }
 
   public init(): void {
@@ -97,135 +122,11 @@ export class QuantumExperience {
   private initMainApp(): void {
     this.glitchEffect.initialize();
     this.particleSystem.start();
-    this.initTypewriter();
-    this.initButtonInteractions();
-    this.initScrollEffects();
     this.matrixRain.start();
-  }
-
-  private initTypewriter(): void {
-    const typewriterElement = document.querySelector('.typewriter') as HTMLElement;
-    if (!typewriterElement) return;
+    this.initScrollEffects();
     
-    const text = typewriterElement.textContent || '';
-    typewriterElement.textContent = '';
-    typewriterElement.style.borderRight = '3px solid #39ff14';
-    
-    let i = 0;
-    const typeInterval = setInterval(() => {
-      typewriterElement.textContent += text.charAt(i);
-      i++;
-      
-      if (i >= text.length) {
-        clearInterval(typeInterval);
-        setTimeout(() => {
-          typewriterElement.style.borderRight = 'none';
-        }, 2000);
-      }
-    }, 100);
-  }
-
-  private initButtonInteractions(): void {
-    if (this.continueBtn) {
-      this.continueBtn.addEventListener('mouseenter', () => {
-        this.continueBtn.style.boxShadow = '0 0 20px #39ff14, inset 0 0 20px rgba(57, 255, 20, 0.1)';
-        this.continueBtn.style.transform = 'translateY(-2px)';
-      });
-      
-      this.continueBtn.addEventListener('mouseleave', () => {
-        this.continueBtn.style.boxShadow = '';
-        this.continueBtn.style.transform = '';
-      });
-      
-      this.continueBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.handleContinue();
-      });
-    }
-  }
-
-  private handleContinue(): void {
-    this.continueBtn.style.transform = 'scale(0.95)';
-    this.continueBtn.style.transition = 'transform 0.1s ease';
-    
-    setTimeout(() => {
-      this.continueBtn.style.transform = '';
-    }, 100);
-    
-    this.showContinueMessage();
-  }
-
-  private showContinueMessage(): void {
-    const message = this.createContinueModal();
-    document.body.appendChild(message.modal);
-    document.body.appendChild(message.backdrop);
-    
-    this.handleModalInteractions(message);
-  }
-
-  private createContinueModal(): { modal: HTMLElement; backdrop: HTMLElement } {
-    const modal = document.createElement('div');
-    modal.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-900 border-2 border-cyber-green p-8 rounded-lg text-center z-50';
-    modal.innerHTML = `
-      <div class="text-cyber-green text-2xl font-cyber mb-4">STEP_01_COMPLETE</div>
-      <div class="text-gray-300 mb-6">Ready to proceed to Step 2: How Quantum Computing Works?</div>
-      <div class="space-x-4">
-        <button id="proceedBtn" class="bg-cyber-green text-black px-6 py-2 font-bold hover:bg-cyber-blue transition-colors">PROCEED</button>
-        <button id="cancelBtn" class="bg-transparent border border-cyber-red text-cyber-red px-6 py-2 hover:bg-cyber-red hover:text-black transition-colors">CANCEL</button>
-      </div>
-    `;
-
-    const backdrop = document.createElement('div');
-    backdrop.className = 'fixed inset-0 bg-black bg-opacity-75 z-40';
-
-    return { modal, backdrop };
-  }
-
-  private handleModalInteractions(elements: { modal: HTMLElement; backdrop: HTMLElement }): void {
-    const proceedBtn = elements.modal.querySelector('#proceedBtn') as HTMLElement;
-    const cancelBtn = elements.modal.querySelector('#cancelBtn') as HTMLElement;
-
-    proceedBtn?.addEventListener('click', () => {
-      this.proceedToStep2();
-    });
-    
-    cancelBtn?.addEventListener('click', () => {
-      this.closeModal(elements);
-    });
-    
-    elements.backdrop.addEventListener('click', () => {
-      this.closeModal(elements);
-    });
-  }
-
-  private closeModal(elements: { modal: HTMLElement; backdrop: HTMLElement }): void {
-    document.body.removeChild(elements.modal);
-    document.body.removeChild(elements.backdrop);
-  }
-
-  private proceedToStep2(): void {
-    const transition = this.createTransitionScreen();
-    document.body.appendChild(transition);
-    
-    requestAnimationFrame(() => {
-      transition.style.opacity = '1';
-    });
-    
-    setTimeout(() => {
-      alert('Step 2 will be implemented next! This is where we\'ll dive into qubits and superposition.');
-      document.body.removeChild(transition);
-    }, 2000);
-  }
-
-  private createTransitionScreen(): HTMLElement {
-    const transition = document.createElement('div');
-    transition.className = 'fixed inset-0 bg-cyber-blue z-50 flex items-center justify-center';
-    transition.style.opacity = '0';
-    transition.style.transition = 'opacity 0.5s ease-in';
-    transition.innerHTML = `
-      <div class="text-white text-4xl font-cyber">LOADING_STEP_02...</div>
-    `;
-    return transition;
+    // Initialize and show first step
+    this.showStep(1);
   }
 
   private initScrollEffects(): void {
@@ -253,11 +154,73 @@ export class QuantumExperience {
     });
   }
 
+  private async transitionToStep(stepNumber: number): Promise<void> {
+    if (stepNumber === this.currentStep) return;
+    
+    try {
+      // Use step manager to show cyberpunk loading screen
+      await this.stepManager.transitionToStep(stepNumber);
+      
+      // Hide current step
+      this.hideCurrentStep();
+      
+      // Show new step
+      this.showStep(stepNumber);
+      
+      this.currentStep = stepNumber;
+    } catch (error) {
+      console.error('Step transition failed:', error);
+    }
+  }
+
+  private handleStepTransition(step: number): void {
+    console.log(`Transitioning to step ${step}`);
+    // Additional handling logic can be added here
+  }
+
+  private showStep(stepNumber: number): void {
+    switch (stepNumber) {
+      case 1:
+        this.step1.initialize();
+        this.step1.show();
+        break;
+      case 2:
+        this.step2.initialize();
+        this.step2.show();
+        break;
+      case 3:
+        this.step3.initialize();
+        this.step3.show();
+        break;
+      default:
+        console.warn(`Step ${stepNumber} not implemented yet`);
+        break;
+    }
+  }
+
+  private hideCurrentStep(): void {
+    switch (this.currentStep) {
+      case 1:
+        this.step1.hide();
+        break;
+      case 2:
+        this.step2.hide();
+        break;
+      case 3:
+        this.step3.hide();
+        break;
+    }
+  }
+
   // Public API methods
   public destroy(): void {
     this.particleSystem?.stop();
     this.matrixRain?.stop();
     this.performanceMonitor?.destroy();
+    this.stepManager?.destroy();
+    this.step1?.destroy();
+    this.step2?.destroy();
+    this.step3?.destroy();
   }
 
   public getConfig(): QuantumExperienceConfig {
@@ -266,5 +229,13 @@ export class QuantumExperience {
 
   public updateConfig(newConfig: Partial<QuantumExperienceConfig>): void {
     this.config = { ...this.config, ...newConfig };
+  }
+
+  public getCurrentStep(): number {
+    return this.currentStep;
+  }
+
+  public async goToStep(stepNumber: number): Promise<void> {
+    await this.transitionToStep(stepNumber);
   }
 }

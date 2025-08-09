@@ -26,11 +26,6 @@ Because qubits can store and process multiple states at once, quantum computers 
 A classical computer tries one combination at a time.
 A quantum computer can explore many combinations **at the same time**.
 
-Got it — let’s trim **Step 2** down to just the **qubits** and **superposition** part, nice and compact but still technical.
-
----
-Alright — here’s **Step 2** with the focus shifted toward the **core science of quantum computing** before we go deeper into Bloch spheres, Schrödinger equation, and the physics-chemistry angle.
-
 ---
 
 ## **Step 2 — How Quantum Computing Actually Works (The Basics)**
@@ -102,9 +97,6 @@ Here:
 On the Bloch sphere, **moving the point** = changing the qubit’s state, and **rotations** = quantum gates acting on it.
 
 ---
-Alright — here’s **Step 4** in simple but technical style.
-
----
 
 ## **Step 4 — Measurement & Collapse**
 
@@ -130,9 +122,6 @@ It’s like asking Schrödinger’s cat if it’s alive — the moment you check
 * Before measurement, quantum computers can **store and process many possibilities at once**
 * Measurement is where we extract classical information from that quantum state
 * The art of quantum algorithms is to *manipulate* the qubits so that when measured, the **correct answer** appears with high probability
-
----
-Alright — here’s **Step 5** in our simple-but-technical journey.
 
 ---
 

@@ -33,8 +33,8 @@ export interface StepData {
   id: number;
   title: string;
   description: string;
-  content: string;
   completed: boolean;
+  progress: number;
 }
 
 export interface PerformanceMetrics {
