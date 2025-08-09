@@ -1,10 +1,6 @@
-Got it — we’ll keep it **technical**, but **plain and digestible**.
-
-Here’s **Step 1** rewritten that way:
-
----
-
 ## **Step 1 — What is Quantum Computing?**
+
+link the preloader here on startup play it for like 3 secs
 
 **Definition:**
 Quantum computing is a type of computing that uses the rules of **quantum mechanics** — the science that explains how tiny particles like electrons and photons behave.
@@ -160,16 +156,12 @@ $$
 
 Quantum entanglement happens when particles share the same quantum state, so measuring one instantly affects the other, no matter the distance. You can imagine each particle as creating an invisible field that other particles can “notice” and respond to. This mutual awareness links their behaviors in a way that classical physics cannot explain.
 
-button for "Quantum Field Visualization" link qunatum visulaization here ok
+link the button for "Quantum Field Visualization" link qunatum visulaization here ok
 
 **Why it’s powerful:**
 
 * In classical computers, bits are independent.
 * In quantum computers, entangled qubits can **represent and process complex relationships instantly**, enabling algorithms that classical systems can’t match in speed or efficiency.
-
----
-Alright — here’s **Step 6** in our storyline.
-
 ---
 
 ## **Step 6 — Quantum Gates: How We Control Qubits**
@@ -195,39 +187,10 @@ In a quantum computer, we use **quantum gates** to **rotate** and **transform** 
 Quantum gates are **reversible** and **unitary** (physics requirement — no information loss).
 By combining gates in sequences, we build **quantum circuits** that solve problems faster than classical computers.
 
----
-Alright — here’s **Step 6** in our storyline.
+gates animation here..
 
 ---
-
-## **Step 6 — Quantum Gates: How We Control Qubits**
-
-In a classical computer, we use **logic gates** (AND, OR, NOT) to change bits.
-In a quantum computer, we use **quantum gates** to **rotate** and **transform** qubits.
-
-**Key difference:**
-
-* Classical gates: Flip bits **0 → 1** or **1 → 0**.
-* Quantum gates: Change the **probabilities and phases** of qubits on the **Bloch sphere**.
-
-**Examples:**
-
-1. **Hadamard Gate (H)** — Puts a qubit into a **superposition**:
-
-   * $|0\rangle \rightarrow \frac{|0\rangle + |1\rangle}{\sqrt{2}}$
-   * Now the qubit is 50% 0, 50% 1.
-2. **Pauli-X Gate** — Works like a NOT gate, flips $|0\rangle \leftrightarrow |1\rangle$.
-3. **CNOT Gate** — Flips the target qubit **only** if the control qubit is $|1\rangle$. This is how we create **entanglement**.
-
-**Why it matters:**
-Quantum gates are **reversible** and **unitary** (physics requirement — no information loss).
-By combining gates in sequences, we build **quantum circuits** that solve problems faster than classical computers.
-
----
-Got it — here’s your **Step 8**.
-
----
-## **Step 8 — Beyond Schrödinger: Thermodynamic Quantum Framework**
+## **Step 7 — Beyond Schrödinger: Thermodynamic Quantum Framework**
 
 Up to now, we’ve treated quantum systems like **perfectly isolated** particles following Schrödinger’s equation.
 But in the real world, **nothing is perfectly isolated** — every qubit interacts with its **environment** (heat, vibrations, radiation).
@@ -249,11 +212,10 @@ Quantum thermodynamics describes what happens when **someone breathes on the coi
 
 In short — moving “beyond Schrödinger” means building **practical, real-world quantum computers** that can survive outside a physics lab.
 
-Alright, here’s a **shorter, intro + points** version of **Step 9 – Cybersecurity & Quantum Computing**:
-
+link the thermodyynamicquantum folder here
 ---
 
-**Step 9 – Cybersecurity and Quantum Computing**
+**Step 8 – Cybersecurity and Quantum Computing**
 
 Quantum computing is set to completely change how we protect data. Today’s encryption methods rely on math problems that take regular computers ages to solve — but quantum machines can crack them much faster. At the same time, quantum tech offers new ways to make security stronger than ever.
 
@@ -263,10 +225,10 @@ Quantum computing is set to completely change how we protect data. Today’s enc
 * **Quantum-safe security:** New cryptography methods are being built to resist quantum attacks.
 * **Quantum key distribution (QKD):** Uses physics to detect eavesdropping instantly.
 
-link the hacking animation here ... then link the cyber loader here ... then link the 
+link the hacking animation here ... then link the cyber loader here ... then link the p5js file
 ---
 
-**Step 10 – Quantum Computing: Present & Future**
+**Step 9 – Quantum Computing: Present & Future**
 
 **🔹 Present – What Quantum Computing is Doing Today**
 
