@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Quantum Field Visualization</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Field Visualization</title>
+  <style>
+    :root {
+      --primary: #5D5CDE;
+      --background-light: #FFFFFFF;
+      --background-dark: #181818;
+      --text-light: #3333333;
+      --text-dark: #F0F0F0;
+      --accent-light: #8A89FF;
+      --accent-dark: #4342B0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--background-light);
+      color: var(--text-light);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--background-dark);
+        color: var(--text-dark);
+      }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background-color: var(--background-light);
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background-color: var(--background-dark);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .equation {
+      font-family: 'Times New Roman', serif;
+      font-size: 18px;
+      text-align: center;
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: rgba(93, 92, 222, 0.1);
+    }
+
+    canvas {
+      display: block;
+      margin: 30px auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      canvas {
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: var(--accent-light);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      button:hover {
+        background-color: var(--accent-dark);
+      }
+    }
+
+    .explanation {
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: rgba(93, 92, 222, 0.05);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .equation {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Quantum Field Visualization</h1>
+
+    <div class="equation">
+      ∂<sub>μ</sub>∂<sup>μ</sup>ϕ + m<sup>2</sup>ϕ + λϕ<sup>3</sup> = 0
+    </div>
+
+    <canvas id="fieldCanvas" width="700" height="400"></canvas>
+
+    <div class="controls">
+      <button id="addParticle">Add Particle</button>
+      <button id="toggleAwareness">Toggle Awareness</button>
+      <button id="reset">Reset</button>
+    </div>
+
+    <div class="explanation">
+      <p>This visualization shows quantum particles as entities that "notice" each other. Each particle creates a field that extends through space, and other particles respond to these fields.</p>
+      <p>The nonlinear term λϕ<sup>3</sup> represents how particles interact with themselves and each other - creating a web of mutual awareness. The brighter connections represent stronger "noticing" between particles.</p>
+      <p>When awareness is active, particles actively respond to each other's fields, creating complex patterns of interaction that mirror the quantum fields described by our equations.</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('fieldCanvas');
+      const ctx = canvas.getContext('2d');
+      const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      // Particles and field settings
+      const particles = [];
+      let awarenessActive = true;
+      let animationId;
+      // Particle class
+      class Particle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.radius = 6;
+          this.baseColor = '#5D5CDE';
+          this.fieldIntensity = 0.8;
+          this.vx = (Math.random() - 0.5) * 2;
+          this.vy = (Math.random() - 0.5) * 2;
+          this.fieldRadius = 150;
+          this.awarenessConnections = [];
+          this.awarenessColor = `rgba(93, 92, 222, 0.7)`;
+          this.awarenessTargets = [];
+          this.superpositionStates = [];
+          // Create superposition states
+          for (let i = 0; i < 3; i++) {
+            this.superpositionStates.push({
+              offset: {
+                x: (Math.random() - 0.5) * 40,
+                y: (Math.random() - 0.5) * 40
+              },
+              radius: this.radius * (0.6 + Math.random() * 0.4),
+              alpha: 0.4 + Math.random() * 0.3
+            });
+          }
+        }
+        update() {
+          // Update position
+          this.x += this.vx;
+          this.y += this.vy;
+          // Boundary checking
+          if (this.x < this.radius || this.x > canvas.width - this.radius) {
+            this.vx = -this.vx;
+          }
+          if (this.y < this.radius || this.y > canvas.height - this.radius) {
+            this.vy = -this.vy;
+          }
+          // Update awareness connections
+          this.awarenessConnections = [];
+          this.awarenessTargets = [];
+          if (awarenessActive) {
+            particles.forEach(p => {
+              if (p !== this) {
+                const dx = p.x - this.x;
+                const dy = p.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < this.fieldRadius) {
+                  const strength = 1 - (distance / this.fieldRadius);
+                  this.awarenessConnections.push({
+                    particle: p,
+                    strength: strength
+                  });
+                  // Particles respond to each other's fields
+                  const forceFactor = 0.05 * strength;
+                  this.vx += (dx / distance) * forceFactor;
+                  this.vy += (dy / distance) * forceFactor;
+                  // Add to awareness targets for visualization
+                  this.awarenessTargets.push({
+                    x: p.x,
+                    y: p.y,
+                    strength: strength
+                  });
+                }
+              }
+            });
+            // Limit velocity
+            const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+            if (speed > 3) {
+              this.vx = (this.vx / speed) * 3;
+              this.vy = (this.vy / speed) * 3;
+            }
+          }
+        }
+        draw() {
+          // Draw field
+          const gradient = ctx.createRadialGradient(
+            this.x, this.y, 0,
+            this.x, this.y, this.fieldRadius
+          );
+          gradient.addColorStop(0, `rgba(93, 92, 222, ${this.fieldIntensity * 0.3})`);
+          gradient.addColorStop(1, 'rgba(93, 92, 222, 0)');
+          ctx.beginPath();
+          ctx.fillStyle = gradient;
+          ctx.arc(this.x, this.y, this.fieldRadius, 0, Math.PI * 2);
+          ctx.fill();
+          // Draw awareness connections
+          if (awarenessActive) {
+            this.awarenessTargets.forEach(target => {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(93, 92, 222, ${target.strength * 0.8})`;
+              ctx.lineWidth = target.strength * 3;
+              ctx.moveTo(this.x, this.y);
+              ctx.lineTo(target.x, target.y);
+              ctx.stroke();
+              // Draw interaction points
+              const midX = (this.x + target.x) / 2;
+              const midY = (this.y + target.y) / 2;
+              ctx.beginPath();
+              ctx.fillStyle = `rgba(238, 130, 238, ${target.strength * 0.9})`;
+              ctx.arc(midX, midY, 3 + target.strength * 4, 0, Math.PI * 2);
+              ctx.fill();
+            });
+          }
+          // Draw probability clouds (superposition states)
+          this.superpositionStates.forEach(state => {
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(93, 92, 222, ${state.alpha * 0.5})`;
+            ctx.arc(
+              this.x + state.offset.x,
+              this.y + state.offset.y,
+              state.radius,
+              0, Math.PI * 2
+            );
+            ctx.fill();
+          });
+          // Draw uncertainty rings
+          for (let i = 0; i < 3; i++) {
+            const ringRadius = this.radius * (2 + i * 1.5);
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(93, 92, 222, ${0.3 - i * 0.08})`;
+            ctx.lineWidth = 1;
+            ctx.arc(this.x, this.y, ringRadius, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          // Draw core particle
+          ctx.beginPath();
+          ctx.fillStyle = this.baseColor;
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fill();
+          // Draw glow
+          ctx.beginPath();
+          const glowGradient = ctx.createRadialGradient(
+            this.x, this.y, 0,
+            this.x, this.y, this.radius * 2
+          );
+          glowGradient.addColorStop(0, `rgba(93, 92, 222, 0.8)`);
+          glowGradient.addColorStop(1, 'rgba(93, 92, 222, 0)');
+          ctx.fillStyle = glowGradient;
+          ctx.arc(this.x, this.y, this.radius * 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      // Initialize with a few particles
+      function init() {
+        particles.length = 0;
+        for (let i = 0; i < 5; i++) {
+          addRandomParticle();
+        }
+        animate();
+      }
+
+      function addRandomParticle() {
+        const x = Math.random() * (canvas.width - 100) + 50;
+        const y = Math.random() * (canvas.height - 100) + 50;
+        particles.push(new Particle(x, y));
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Draw background
+        ctx.fillStyle = isDarkMode ? 'rgba(30, 30, 40, 0.3)' : 'rgba(245, 245, 255, 0.5)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Update and draw particles
+        particles.forEach(particle => {
+          particle.update();
+        });
+        // Draw particles after all updates to ensure connections are drawn correctly
+        particles.forEach(particle => {
+          particle.draw();
+        });
+        animationId = requestAnimationFrame(animate);
+      }
+      // Event listeners
+      document.getElementById('addParticle').addEventListener('click', function() {
+        addRandomParticle();
+      });
+      document.getElementById('toggleAwareness').addEventListener('click', function() {
+        awarenessActive = !awarenessActive;
+        this.textContent = awarenessActive ? 'Disable Awareness' : 'Enable Awareness';
+      });
+      document.getElementById('reset').addEventListener('click', function() {
+        cancelAnimationFrame(animationId);
+        init();
+      });
+      // Handle canvas click to add particles
+      canvas.addEventListener('click', function(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        particles.push(new Particle(x, y));
+      });
+      // Initialize the visualization
+      init();
+    });
+  </script>
+</body>
+
+</html>
+<!-- partial -->
+  
+</body>
+</html>
