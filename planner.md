@@ -248,4 +248,53 @@ Imagine a qubit as a spinning coin. Schrödinger’s equation describes it in pe
 Quantum thermodynamics describes what happens when **someone breathes on the coin**, the table shakes, or the room heats up.
 
 In short — moving “beyond Schrödinger” means building **practical, real-world quantum computers** that can survive outside a physics lab.
+
+Alright, here’s a **shorter, intro + points** version of **Step 9 – Cybersecurity & Quantum Computing**:
+
+---
+
+**Step 9 – Cybersecurity and Quantum Computing**
+
+Quantum computing is set to completely change how we protect data. Today’s encryption methods rely on math problems that take regular computers ages to solve — but quantum machines can crack them much faster. At the same time, quantum tech offers new ways to make security stronger than ever.
+
+**Key points:**
+
+* **Breaking old encryption:** Quantum algorithms (like Shor’s) can solve the big-number problems behind RSA and ECC much faster.
+* **Quantum-safe security:** New cryptography methods are being built to resist quantum attacks.
+* **Quantum key distribution (QKD):** Uses physics to detect eavesdropping instantly.
+
+link the hacking animation here ... then link the cyber loader here ... then link the 
+---
+
+**Step 10 – Quantum Computing: Present & Future**
+
+**🔹 Present – What Quantum Computing is Doing Today**
+
+* **Cryptography testing:** Using quantum algorithms to try and break classical encryption.
+* **Quantum simulations:** Modeling molecules and chemical reactions beyond classical limits.
+* **Optimization problems:** Improving logistics, finance strategies, and energy grids.
+* **Machine learning boosts:** Early experiments in faster training and pattern recognition.
+* **Material science:** Simulating superconductors and new materials at the quantum level.
+
+**Top 6 Companies Leading Quantum Tech (Present)**
+
+1. **IBM** – Cloud-based quantum access, superconducting qubits.
+2. **Google** – Quantum supremacy experiment, Sycamore processor.
+3. **Microsoft** – Azure Quantum platform, topological qubits research.
+4. **Intel** – Quantum chips and cryogenic control tech.
+5. **D-Wave** – Commercial quantum annealers for optimization.
+6. **Rigetti Computing** – Hybrid quantum-classical cloud solutions.
+
+---
+
+**🔹 Future – What to Expect**
+
+* **Post-quantum security:** New encryption that can resist quantum attacks.
+* **Full-scale quantum AI:** Training models in seconds that take classical supercomputers weeks.
+* **DNA cracking & protein folding:** Mapping life’s code instantly for disease cures.
+* **Ultra-accurate climate modeling:** Predicting decades ahead with atom-level precision.
+* **Time travel theories testing:** Using quantum entanglement and wormhole models experimentally.
+* **Quantum internet:** Ultra-secure, instant global communications.
+
+Link the box folder here ok
 ---
