@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Cyberpunk loader</title>
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+<link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="loader-container">
+  <!-- Matrix rain background -->
+  <div class="matrix-bg" id="matrix"></div>
+
+  <!-- Rotating hexagon container -->
+  <div class="hexagon-container">
+    <div class="hexagon"></div>
+  </div>
+
+  <!-- Hologram effect -->
+  <div class="hologram"></div>
+
+  <div class="loader-wrapper">
+    <!-- Data streams -->
+    <div class="data-stream" style="left: -100px; animation-delay: 0s;"></div>
+    <div class="data-stream" style="left: 100px; animation-delay: 1s;"></div>
+    <div class="data-stream" style="right: -100px; animation-delay: 0.5s;"></div>
+
+    <!-- Status text -->
+    <div class="status-text status-left">
+      > INITIALIZING SYSTEMS<br>
+      > SCANNING NETWORK<br>
+      > ANALYZING DATA<br>
+      > QUANTUM SYNC: ACTIVE
+    </div>
+
+    <div class="status-text status-right">
+      STATUS: PROCESSING<br>
+      BUFFER: 87%<br>
+      UPLINK: STABLE<br>
+      SECURITY: ENCRYPTED
+    </div>
+
+    <!-- Scanner effect -->
+    <div class="scanner"></div>
+
+    <svg width="100%" height="100%" viewBox="0 0 100 100" style="transform: rotate(-90deg);">
+      <!-- Outer ring -->
+      <circle class="circle outer" cx="50" cy="50" r="45" />
+
+      <!-- Middle ring -->
+      <circle class="circle middle" cx="50" cy="50" r="35" />
+
+      <!-- Inner ring -->
+      <circle class="circle inner" cx="50" cy="50" r="25" />
+
+      <!-- Additional decorative elements -->
+      <path class="circle outer" d="M10,50 L90,50" style="opacity: 0.3;" />
+      <path class="circle outer" d="M50,10 L50,90" style="opacity: 0.3;" />
+    </svg>
+
+    <div class="progress-text">
+      QUANTUM CORE INITIALIZATION...
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
