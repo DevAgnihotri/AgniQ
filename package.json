@@ -1,0 +1,46 @@
+{
+  "name": "quantum-computing-experience",
+  "version": "1.0.0",
+  "description": "A progressive cyberpunk-style quantum computing educational experience",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npm run build:ts && npx live-server --port=3000 --host=localhost --open=/index.html",
+    "build:ts": "npx tsc",
+    "build:watch": "npx tsc --watch",
+    "build:css": "npx tailwindcss -i ./styles.css -o ./dist/styles.css",
+    "build": "npm run build:ts && npm run build:css",
+    "server": "node server.js",
+    "serve": "npx http-server -p 3000 -c-1",
+    "start": "npm run build && npm run server",
+    "watch": "concurrently \"npm run build:watch\" \"npm run dev\"",
+    "clean": "rimraf dist",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "quantum-computing",
+    "cyberpunk",
+    "education",
+    "interactive",
+    "typescript",
+    "tailwindcss",
+    "p5js"
+  ],
+  "author": "Quantum Experience Team",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.2.0",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2",
+    "postcss": "^8.5.6",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}

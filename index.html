@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Computing Experience | Step 1</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Cyberpunk Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css'>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cyber': ['Orbitron', 'monospace'],
+                        'mono': ['Share Tech Mono', 'monospace']
+                    },
+                    colors: {
+                        'cyber-blue': '#0033FF',
+                        'cyber-red': '#ff4d4d',
+                        'cyber-pink': '#FF006E',
+                        'cyber-green': '#39FF14',
+                        'dark-bg': '#1a0000'
+                    },
+                    animation: {
+                        'glitch': 'glitch 2s infinite',
+                        'fadeIn': 'fadeIn 1s ease-in',
+                        'slideUp': 'slideUp 0.8s ease-out',
+                        'pulse-slow': 'pulse 3s infinite'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-bg text-cyber-red font-mono overflow-x-hidden">
+    
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-cyber-blue">
+        <div class="text-center">
+            <div class="cube-container">
+                <div class="cube">
+                    <div class="faces f1">
+                        <div class="dot p1"></div>
+                        <div class="dot p2"></div>
+                        <div class="dot p3"></div>
+                        <div class="dot p4"></div>
+                        <div class="dot p5"></div>
+                        <div class="dot p6"></div>
+                        <div class="dot p7"></div>
+                        <div class="dot p8"></div>
+                        <div class="dot p9"></div>
+                    </div>
+                    <div class="faces f2">
+                        <div class="dot p10"></div>
+                        <div class="dot p11"></div>
+                        <div class="dot p12"></div>
+                        <div class="dot p13"></div>
+                    </div>
+                    <div class="faces f3">
+                        <div class="dot p1"></div>
+                        <div class="dot p2"></div>
+                        <div class="dot p3"></div>
+                        <div class="dot p4"></div>
+                        <div class="dot p5"></div>
+                        <div class="dot p6"></div>
+                        <div class="dot p7"></div>
+                        <div class="dot p8"></div>
+                        <div class="dot p9"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-name text-white font-mono font-light text-xl tracking-widest mt-8">
+                <div class="l1">project-</div>
+                <div class="l2">-quantum</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="main-app" class="hidden">
+        <!-- Navigation Header -->
+        <nav class="fixed top-0 w-full z-40 bg-dark-bg/90 backdrop-blur-sm border-b border-cyber-red">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <h1 class="text-2xl font-cyber font-bold text-cyber-red glitch-text" data-text="QUANTUM_EXPERIENCE">QUANTUM_EXPERIENCE</h1>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <span class="text-lg text-cyber-green font-cyber">STEP_01</span>
+                        <div class="w-32 h-1 bg-gray-800 rounded">
+                            <div class="w-1/9 h-full bg-cyber-green rounded animate-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center relative pt-16">
+            <!-- Background Effects -->
+            <div class="absolute inset-0 bg-gradient-to-br from-dark-bg via-red-950/20 to-dark-bg"></div>
+            <div class="absolute inset-0 cyber-grid opacity-10"></div>
+            
+            <!-- Content -->
+            <div class="relative z-10 text-center max-w-6xl mx-auto px-4">
+                <h1 class="main-title mb-8 leading-tight">
+                    <span class="quantum-text glitch-text" data-text="QUANTUM">QUANTUM</span>
+                    <br>
+                    <span class="computing-text glow-text">COMPUTING</span>
+                </h1>
+                
+                <div class="mb-12 max-w-4xl mx-auto">
+                    <p class="text-2xl md:text-3xl text-cyber-green mb-6 typewriter section-header cyber-green">
+                        > WHAT_IS_QUANTUM_COMPUTING?
+                    </p>
+                    <div class="text-lg md:text-xl text-gray-300 space-y-4 animate-fadeIn">
+                        <p class="border-l-4 border-cyber-pink pl-6">
+                            Quantum computing is a type of computing that uses the rules of <span class="text-cyber-green">quantum mechanics</span> — the science that explains how tiny particles like electrons and photons behave.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Key Differences Section -->
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-gray-900/50 border border-cyber-red p-6 rounded cyber-box">
+                        <h3 class="text-3xl font-cyber text-cyber-red mb-4 section-header cyber-red">CLASSICAL_COMPUTERS</h3>
+                        <p class="text-gray-300">Use <span class="text-cyber-blue">bits</span>, which can be either <span class="text-cyber-green">0</span> or <span class="text-cyber-green">1</span></p>
+                        <div class="mt-4 flex justify-center">
+                            <div class="flex space-x-2">
+                                <div class="w-8 h-8 bg-cyber-green rounded border-2 border-cyber-green flex items-center justify-center font-bold">0</div>
+                                <div class="w-8 h-8 bg-cyber-green rounded border-2 border-cyber-green flex items-center justify-center font-bold">1</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900/50 border border-cyber-blue p-6 rounded cyber-box">
+                        <h3 class="text-3xl font-cyber text-cyber-blue mb-4 section-header">QUANTUM_COMPUTERS</h3>
+                        <p class="text-gray-300">Use <span class="text-cyber-pink">qubits</span>, which can be <span class="text-cyber-green">0</span>, <span class="text-cyber-green">1</span>, or a <span class="text-cyber-pink">superposition</span> (both at once)</p>
+                        <div class="mt-4 flex justify-center">
+                            <div class="flex space-x-2">
+                                <div class="w-8 h-8 bg-cyber-pink rounded border-2 border-cyber-pink flex items-center justify-center font-bold text-xs">0+1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Terms Section -->
+                <div class="mb-12">
+                    <h3 class="section-header cyber-green">KEY_CONCEPTS</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-gray-900/30 border border-cyber-green p-6 rounded cyber-box hover:bg-gray-900/50 transition-all">
+                            <h4 class="text-2xl font-cyber text-cyber-green mb-3">SUPERPOSITION</h4>
+                            <p class="text-gray-300 text-sm">A qubit can be in more than one state at once.</p>
+                        </div>
+                        <div class="bg-gray-900/30 border border-cyber-pink p-6 rounded cyber-box hover:bg-gray-900/50 transition-all">
+                            <h4 class="text-2xl font-cyber text-cyber-pink mb-3">ENTANGLEMENT</h4>
+                            <p class="text-gray-300 text-sm">Two qubits can be linked so that changing one instantly affects the other.</p>
+                        </div>
+                        <div class="bg-gray-900/30 border border-cyber-blue p-6 rounded cyber-box hover:bg-gray-900/50 transition-all">
+                            <h4 class="text-2xl font-cyber text-cyber-blue mb-3">INTERFERENCE</h4>
+                            <p class="text-gray-300 text-sm">Quantum computers can make certain outcomes more likely and others less likely.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analogy Section -->
+                <div class="mb-12 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-cyber-red p-8 rounded-lg cyber-box">
+                    <h3 class="section-header cyber-red">QUICK_ANALOGY</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">🖥️</div>
+                            <p class="text-cyber-green font-semibold mb-2">Classical Computer</p>
+                            <p class="text-gray-300 text-sm">Tries one combination at a time</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">⚛️</div>
+                            <p class="text-cyber-blue font-semibold mb-2">Quantum Computer</p>
+                            <p class="text-gray-300 text-sm">Explores many combinations <span class="text-cyber-pink">at the same time</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Continue Button -->
+                <div class="text-center">
+                    <button id="continueBtn" class="bg-transparent border-2 border-cyber-green text-cyber-green px-8 py-4 text-xl font-cyber font-bold hover:bg-cyber-green hover:text-black transition-all duration-300 cyber-box">
+                        CONTINUE_TO_STEP_02 >
+                    </button>
+                </div>
+            </div>
+
+            <!-- Floating Particles -->
+            <div id="particles-container" class="absolute inset-0 pointer-events-none"></div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="dist/main.js"></script>
+    <!-- Fallback for older browsers -->
+    <script nomodule src="script.js"></script>
+</body>
+</html>
