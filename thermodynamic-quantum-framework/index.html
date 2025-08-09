@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Thermodynamic Quantum Framework</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<div class="container">
+		<h1>Beyond Schrödinger:<br> Thermodynamic Quantum Framework</h1>
+		<div class="equation">
+			\[ \psi' = \Phi_{\text{Second Law}} \left[ (E \cdot \Delta S) - S_r \right]^\infty \]
+		</div>
+		<div class="controls">
+			<div class="control-group">
+				<label for="energy">Energy (\( E \)): <span id="energyValue">1</span></label>
+				<input type="range" id="energy" min="0.1" max="3" step="0.1" value="1">
+			</div>
+			<div class="control-group">
+				<label for="deltaS">Entropy Change (\( \Delta S \)): <span id="deltaSValue">1</span></label>
+				<input type="range" id="deltaS" min="0.1" max="2" step="0.1" value="1">
+			</div>
+			<div class="control-group">
+				<label for="residualS">Residual Entropy (\( S_r \)): <span id="residualSValue">0.5</span></label>
+				<input type="range" id="residualS" min="0" max="1" step="0.1" value="0.5">
+			</div>
+			<button onclick="resetAnimation()">Reset Animation</button>
+		</div>
+		<canvas id="thermoCanvas" width="700" height="400"></canvas>
+		<div class="info">
+			<h3>About the Visualization</h3>
+			<p>This interface visualizes a thermodynamic extension of quantum mechanics, where energy (\( E \)), entropy change (\( \Delta S \)), and residual entropy (\( S_r \)) drive the evolution of quantum states (\( \psi' \)) under the Second Law of Thermodynamics. Particles transition from disorder to structured patterns, reflecting the emergence of information and complexity. Adjust the sliders to explore how these parameters shape the system, and reset the animation to restart.</p>
+			<p><strong>Parameters:</strong></p>
+			<ul>
+				<li><strong>Energy (\( E \))</strong>: Drives particle motion and pattern formation.</li>
+				<li><strong>Entropy Change (\( \Delta S \))</strong>: Controls the transformation of disorder into structured information.</li>
+				<li><strong>Residual Entropy (\( S_r \))</strong>: Adds randomness, representing unprocessed disorder.</li>
+			</ul>
+		</div>
+	</div>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

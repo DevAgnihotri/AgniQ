@@ -220,3 +220,28 @@ Quantum gates are **reversible** and **unitary** (physics requirement — no inf
 By combining gates in sequences, we build **quantum circuits** that solve problems faster than classical computers.
 
 ---
+Got it — here’s your **Step 8**.
+
+---
+## **Step 8 — Beyond Schrödinger: Thermodynamic Quantum Framework**
+
+Up to now, we’ve treated quantum systems like **perfectly isolated** particles following Schrödinger’s equation.
+But in the real world, **nothing is perfectly isolated** — every qubit interacts with its **environment** (heat, vibrations, radiation).
+
+That’s where **Quantum Thermodynamics** comes in:
+
+* It studies how **energy, entropy, and temperature** affect quantum systems.
+* It tells us how **information flows** when quantum systems are not perfectly closed.
+
+**Why it matters for computing:**
+
+* Qubits are extremely fragile — heat or random interactions cause **decoherence** (loss of quantum state).
+* Understanding thermodynamics helps us design **error correction**, **cooling systems**, and **fault-tolerant architectures**.
+* It also allows us to explore **energy-efficient computation**, where quantum computers could, in theory, use **less energy** for certain tasks than classical supercomputers.
+
+**Example:**
+Imagine a qubit as a spinning coin. Schrödinger’s equation describes it in perfect isolation.
+Quantum thermodynamics describes what happens when **someone breathes on the coin**, the table shakes, or the room heats up.
+
+In short — moving “beyond Schrödinger” means building **practical, real-world quantum computers** that can survive outside a physics lab.
+---
