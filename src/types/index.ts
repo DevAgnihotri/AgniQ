@@ -1,4 +1,5 @@
 // Type definitions for Quantum Computing Experience
+export { Step7Thermodynamics } from '../steps/Step7Thermodynamics';
 
 export interface QuantumExperienceConfig {
   preloaderDuration: number;

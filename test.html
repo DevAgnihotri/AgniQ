@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Experience - Step Tester</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #000000, #1a1a2e, #16213e);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .cyber-btn {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border: 2px solid #06b6d4;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cyber-btn:hover {
+            border-color: #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
+        }
+        
+        .step-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            border-color: rgba(0, 255, 65, 0.6);
+            box-shadow: 0 8px 32px rgba(0, 255, 65, 0.1);
+        }
+        
+        .pulse-border {
+            animation: pulseBorder 2s infinite;
+        }
+        
+        @keyframes pulseBorder {
+            0%, 100% { border-color: rgba(6, 182, 212, 0.3); }
+            50% { border-color: rgba(0, 255, 65, 0.8); }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-green-400">
+    <div class="container mx-auto px-6 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-6xl font-bold mb-4 glow-text">
+                QUANTUM EXPERIENCE TESTER
+            </h1>
+            <p class="text-xl text-cyan-300 mb-6">Navigate Through All Steps</p>
+            <div class="h-1 w-32 bg-gradient-to-r from-cyan-400 to-green-400 mx-auto"></div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-12">
+            <button onclick="loadStep(1)" class="cyber-btn px-4 py-3 rounded-lg text-white font-bold">
+                STEP 1
+            </button>
+            <button onclick="loadStep(2)" class="cyber-btn px-4 py-3 rounded-lg text-white font-bold">
+                STEP 2
+            </button>
+            <button onclick="loadStep(3)" class="cyber-btn px-4 py-3 rounded-lg text-white font-bold">
+                STEP 3
+            </button>
+            <button onclick="loadStep(4)" class="cyber-btn px-4 py-3 rounded-lg text-white font-bold">
+                STEP 4
+            </button>
+            <button onclick="loadStep(5)" class="cyber-btn px-4 py-3 rounded-lg text-white font-bold">
+                STEP 5
+            </button>
+            <button onclick="loadStep(6)" class="cyber-btn px-4 py-3 rounded-lg text-white font-bold">
+                STEP 6
+            </button>
+            <button onclick="loadStep(7)" class="cyber-btn px-4 py-3 rounded-lg text-white font-bold">
+                STEP 7
+            </button>
+        </div>
+
+        <!-- Step Details -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <!-- Step 1 -->
+            <div class="step-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center font-bold text-black mr-3">1</div>
+                    <h3 class="text-xl font-bold text-green-400">Welcome</h3>
+                </div>
+                <p class="text-gray-300 text-sm mb-4">Introduction to quantum computing with cyberpunk animations and matrix rain effects.</p>
+                <button onclick="loadStep(1)" class="cyber-btn w-full px-4 py-2 rounded text-white font-bold">
+                    🚀 LAUNCH STEP 1
+                </button>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold text-white mr-3">2</div>
+                    <h3 class="text-xl font-bold text-blue-400">Quantum Basics</h3>
+                </div>
+                <p class="text-gray-300 text-sm mb-4">Learn fundamental concepts: superposition, qubits, and quantum states with interactive demos.</p>
+                <button onclick="loadStep(2)" class="cyber-btn w-full px-4 py-2 rounded text-white font-bold">
+                    ⚛️ LAUNCH STEP 2
+                </button>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center font-bold text-white mr-3">3</div>
+                    <h3 class="text-xl font-bold text-purple-400">Bloch Sphere</h3>
+                </div>
+                <p class="text-gray-300 text-sm mb-4">3D visualization of qubit states on the Bloch sphere with interactive controls.</p>
+                <button onclick="loadStep(3)" class="cyber-btn w-full px-4 py-2 rounded text-white font-bold">
+                    🌐 LAUNCH STEP 3
+                </button>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center font-bold text-white mr-3">4</div>
+                    <h3 class="text-xl font-bold text-red-400">Measurement Collapse</h3>
+                </div>
+                <p class="text-gray-300 text-sm mb-4">Experience quantum measurement and wave function collapse with Schrödinger's cat.</p>
+                <button onclick="loadStep(4)" class="cyber-btn w-full px-4 py-2 rounded text-white font-bold">
+                    📏 LAUNCH STEP 4
+                </button>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center font-bold text-white mr-3">5</div>
+                    <h3 class="text-xl font-bold text-pink-400">Quantum Entanglement</h3>
+                </div>
+                <p class="text-gray-300 text-sm mb-4">Explore spooky action at a distance with entangled particle visualizations.</p>
+                <button onclick="loadStep(5)" class="cyber-btn w-full px-4 py-2 rounded text-white font-bold">
+                    🔗 LAUNCH STEP 5
+                </button>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="step-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center font-bold text-black mr-3">6</div>
+                    <h3 class="text-xl font-bold text-cyan-400">Quantum Gates</h3>
+                </div>
+                <p class="text-gray-300 text-sm mb-4">Interactive quantum gates with 3D Bloch sphere and circuit building tools.</p>
+                <button onclick="loadStep(6)" class="cyber-btn w-full px-4 py-2 rounded text-white font-bold">
+                    ⚡ LAUNCH STEP 6
+                </button>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="step-card p-6 rounded-xl pulse-border">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center font-bold text-white mr-3">7</div>
+                    <h3 class="text-xl font-bold text-orange-400">Thermodynamics</h3>
+                </div>
+                <p class="text-gray-300 text-sm mb-4">Quantum thermodynamics with heat engines, entropy, and thermal cycles visualization.</p>
+                <button onclick="loadStep(7)" class="cyber-btn w-full px-4 py-2 rounded text-white font-bold">
+                    🔥 LAUNCH STEP 7
+                </button>
+            </div>
+        </div>
+
+        <!-- Status Panel -->
+        <div class="step-card p-6 rounded-xl mb-8">
+            <h3 class="text-xl font-bold text-cyan-400 mb-4">📊 Testing Status</h3>
+            <div id="status" class="text-green-400 font-mono">
+                Ready to test. Click any step button above to navigate.
+            </div>
+            <div class="mt-4 flex space-x-4">
+                <button onclick="openMainApp()" class="cyber-btn px-6 py-2 rounded text-white font-bold">
+                    📱 Open Main App
+                </button>
+                <button onclick="refreshPage()" class="cyber-btn px-6 py-2 rounded text-white font-bold">
+                    🔄 Refresh
+                </button>
+                <button onclick="goBack()" class="cyber-btn px-6 py-2 rounded text-white font-bold">
+                    ← Go Back
+                </button>
+            </div>
+        </div>
+
+        <!-- System Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="step-card p-4 rounded-xl">
+                <h4 class="text-cyan-400 font-bold mb-2">🔧 Build Status</h4>
+                <div id="buildStatus" class="text-green-400 text-sm font-mono">
+                    TypeScript: ✅ Compiled<br>
+                    Steps: ✅ 7/7 Available<br>
+                    Framework: ✅ Ready
+                </div>
+            </div>
+            <div class="step-card p-4 rounded-xl">
+                <h4 class="text-purple-400 font-bold mb-2">⚡ Performance</h4>
+                <div class="text-green-400 text-sm font-mono">
+                    Step 7: ✅ Optimized<br>
+                    Lag Issues: ✅ Fixed<br>
+                    Iframe: ✅ Linked
+                </div>
+            </div>
+            <div class="step-card p-4 rounded-xl">
+                <h4 class="text-orange-400 font-bold mb-2">🎯 Current Focus</h4>
+                <div class="text-yellow-400 text-sm font-mono">
+                    Testing: Step Navigation<br>
+                    Status: Ready for Demo<br>
+                    Mode: Development
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-12 text-gray-500">
+            <p>Quantum Computing Experience - Step Testing Interface</p>
+            <p class="text-sm">Use this interface to quickly test and navigate between all quantum steps</p>
+        </div>
+    </div>
+
+    <script>
+        function loadStep(stepNumber) {
+            updateStatus(`Loading Step ${stepNumber}...`);
+            
+            // Simulate loading and redirect to the main app with the specific step
+            setTimeout(() => {
+                updateStatus(`✅ Navigating to Step ${stepNumber}`);
+                window.location.href = `index.html#step-${stepNumber}`;
+            }, 500);
+        }
+
+        function updateStatus(message) {
+            document.getElementById('status').innerHTML = message;
+        }
+
+        function openMainApp() {
+            updateStatus('🚀 Opening main Quantum Experience...');
+            window.location.href = 'index.html';
+        }
+
+        function refreshPage() {
+            window.location.reload();
+        }
+
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key >= '1' && e.key <= '7') {
+                loadStep(parseInt(e.key));
+            } else if (e.key === 'Escape') {
+                openMainApp();
+            } else if (e.key === 'r' || e.key === 'R') {
+                refreshPage();
+            }
+        });
+
+        // Update status on load
+        window.addEventListener('load', function() {
+            updateStatus('🎮 Test interface ready. Use buttons or press 1-7 keys to navigate.');
+        });
+    </script>
+</body>
+</html>

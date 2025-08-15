@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Step Tester</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .step-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .step-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        #test-panel {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Cyber glow effects */
+        .step-btn {
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+        
+        .step-btn:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <script type="module">
+        // Import and run the TypeScript tester
+        import('./test.js').then(module => {
+            console.log('🧪 Quantum Step Tester initialized');
+        }).catch(error => {
+            console.error('❌ Error loading tester:', error);
+            
+            // Fallback message
+            document.body.innerHTML = `
+                <div class="min-h-screen flex items-center justify-center bg-black text-white">
+                    <div class="text-center">
+                        <h1 class="text-4xl font-bold text-red-400 mb-4">⚠️ TESTER ERROR</h1>
+                        <p class="text-gray-400 mb-4">Failed to load the TypeScript tester.</p>
+                        <p class="text-sm text-gray-500">Make sure to compile TypeScript first: <code class="bg-gray-800 px-2 py-1 rounded">npx tsc</code></p>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

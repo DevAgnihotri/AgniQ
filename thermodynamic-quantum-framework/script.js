@@ -11,6 +11,31 @@ const canvas = document.getElementById('thermoCanvas');
 		const numParticles = 100;
 		let time = 0;
 
+		// Listen for messages from parent window
+		window.addEventListener('message', function(event) {
+			if (event.data.type === 'setEnergy') {
+				energyInput.value = event.data.value;
+				drawVisualization();
+			} else if (event.data.type === 'setCycle') {
+				// Adjust parameters based on cycle
+				switch(event.data.value) {
+					case 'carnot':
+						energyInput.value = 1.5;
+						deltaSInput.value = 1.2;
+						break;
+					case 'otto':
+						energyInput.value = 2.0;
+						deltaSInput.value = 1.5;
+						break;
+					case 'diesel':
+						energyInput.value = 2.5;
+						deltaSInput.value = 1.8;
+						break;
+				}
+				drawVisualization();
+			}
+		});
+
 		function initializeParticles() {
 			particles = [];
 			for (let i = 0; i < numParticles; i++) {

@@ -3,7 +3,7 @@ import { StepData } from '../types/index.js';
 
 export class StepManager {
   private currentStep: number = 1;
-  private maxSteps: number = 6; // Updated to include Step 6: Quantum Gates
+  private maxSteps: number = 7; // Updated to include Step 7: Thermodynamics
   private loadingContainer: HTMLElement | null = null;
   private stepCallback: ((step: number) => void) | null = null;
 

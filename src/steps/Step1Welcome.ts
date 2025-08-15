@@ -96,14 +96,22 @@ export class Step1Welcome {
 
           <!-- Call to Action -->
           <div class="text-center">
-            <button id="continueBtn" class="cyber-btn bg-cyber-green text-black text-xl font-cyber font-bold px-12 py-4 rounded-lg 
-                       border-2 border-cyber-green hover:bg-transparent hover:text-cyber-green 
-                       transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyber-green/50">
-              CONTINUE_TO_STEP_02 →
-            </button>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+              <button id="continueBtn" class="cyber-btn bg-cyber-green text-black text-xl font-cyber font-bold px-12 py-4 rounded-lg 
+                         border-2 border-cyber-green hover:bg-transparent hover:text-cyber-green 
+                         transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyber-green/50">
+                CONTINUE_TO_STEP_02 →
+              </button>
+              
+              <button id="testModeBtn" class="cyber-btn bg-cyber-blue text-white text-lg font-cyber font-bold px-8 py-3 rounded-lg 
+                         border-2 border-cyber-blue hover:bg-transparent hover:text-cyber-blue 
+                         transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyber-blue/50">
+                🧪 TEST_MODE
+              </button>
+            </div>
             
             <div class="mt-8 text-sm text-gray-500 font-mono">
-              Press [CTRL+SHIFT+P] for performance monitor
+              Press [CTRL+SHIFT+P] for performance monitor | Test Mode: Quick step navigation
             </div>
           </div>
         </div>
@@ -131,6 +139,7 @@ export class Step1Welcome {
 
   private setupEventListeners(): void {
     const continueBtn = document.getElementById('continueBtn');
+    const testModeBtn = document.getElementById('testModeBtn');
     
     if (continueBtn) {
       continueBtn.addEventListener('mouseenter', () => {
@@ -146,6 +155,23 @@ export class Step1Welcome {
       continueBtn.addEventListener('click', (e) => {
         e.preventDefault();
         this.handleContinue();
+      });
+    }
+
+    if (testModeBtn) {
+      testModeBtn.addEventListener('mouseenter', () => {
+        testModeBtn.style.boxShadow = '0 0 20px #00d9ff, inset 0 0 20px rgba(0, 217, 255, 0.1)';
+        testModeBtn.style.transform = 'translateY(-2px) scale(1.05)';
+      });
+      
+      testModeBtn.addEventListener('mouseleave', () => {
+        testModeBtn.style.boxShadow = '';
+        testModeBtn.style.transform = '';
+      });
+      
+      testModeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.openTestMode();
       });
     }
   }
@@ -168,6 +194,11 @@ export class Step1Welcome {
     // Dispatch event to main application to use StepManager
     const event = new CustomEvent('stepTransition', { detail: { step: 2 } });
     window.dispatchEvent(event);
+  }
+
+  private openTestMode(): void {
+    // Open the test runner in a new tab
+    window.open('./test-runner.html', '_blank');
   }
 
   public show(): void {

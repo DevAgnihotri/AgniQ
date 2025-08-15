@@ -13,6 +13,7 @@ import { Step3BlochSphere } from './steps/Step3BlochSphere.js';
 import { Step4MeasurementCollapse } from './steps/Step4MeasurementCollapse.js';
 import { Step5QuantumEntanglement } from './steps/Step5QuantumEntanglement.js';
 import { Step6QuantumGates } from './steps/Step6QuantumGates.js';
+import { Step7Thermodynamics } from './steps/Step7Thermodynamics.js';
 
 export class QuantumExperience {
   private config: QuantumExperienceConfig;
@@ -34,6 +35,7 @@ export class QuantumExperience {
   private step4!: Step4MeasurementCollapse;
   private step5!: Step5QuantumEntanglement;
   private step6!: Step6QuantumGates;
+  private step7!: Step7Thermodynamics;
 
   constructor(config: Partial<QuantumExperienceConfig> = {}) {
     this.config = {
@@ -92,6 +94,7 @@ export class QuantumExperience {
     this.step4 = new Step4MeasurementCollapse();
     this.step5 = new Step5QuantumEntanglement();
     this.step6 = new Step6QuantumGates();
+    this.step7 = new Step7Thermodynamics();
     
     // Setup step transition listeners
     window.addEventListener('stepTransition', (e: any) => {
@@ -168,9 +171,9 @@ export class QuantumExperience {
     if (stepNumber === this.currentStep) return;
     
     // Validate step number
-    if (stepNumber < 1 || stepNumber > 6) {
-      console.warn(`Invalid step number: ${stepNumber}. Valid steps are 1-6.`);
-      if (stepNumber > 6) {
+    if (stepNumber < 1 || stepNumber > 7) {
+      console.warn(`Invalid step number: ${stepNumber}. Valid steps are 1-7.`);
+      if (stepNumber > 7) {
         this.showComingSoonModal();
       }
       return;
@@ -232,6 +235,11 @@ export class QuantumExperience {
         console.log('QuantumExperience: Initializing and showing Step 6');
         this.step6.show();
         break;
+      case 7:
+        console.log('QuantumExperience: Initializing and showing Step 7');
+        this.step7.initialize();
+        this.step7.show();
+        break;
       default:
         console.warn(`Step ${stepNumber} not implemented yet`);
         break;
@@ -257,6 +265,9 @@ export class QuantumExperience {
         break;
       case 6:
         this.step6.hide();
+        break;
+      case 7:
+        this.step7.hide();
         break;
     }
   }
