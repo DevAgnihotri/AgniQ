@@ -11,6 +11,7 @@ import { Step1Welcome } from './steps/Step1Welcome.js';
 import { Step2QuantumBasics } from './steps/Step2QuantumBasics.js';
 import { Step3BlochSphere } from './steps/Step3BlochSphere.js';
 import { Step4MeasurementCollapse } from './steps/Step4MeasurementCollapse.js';
+import { Step5QuantumEntanglement } from './steps/Step5QuantumEntanglement.js';
 
 export class QuantumExperience {
   private config: QuantumExperienceConfig;
@@ -30,6 +31,7 @@ export class QuantumExperience {
   private step2!: Step2QuantumBasics;
   private step3!: Step3BlochSphere;
   private step4!: Step4MeasurementCollapse;
+  private step5!: Step5QuantumEntanglement;
 
   constructor(config: Partial<QuantumExperienceConfig> = {}) {
     this.config = {
@@ -86,6 +88,7 @@ export class QuantumExperience {
     this.step2 = new Step2QuantumBasics();
     this.step3 = new Step3BlochSphere();
     this.step4 = new Step4MeasurementCollapse();
+    this.step5 = new Step5QuantumEntanglement();
     
     // Setup step transition listeners
     window.addEventListener('stepTransition', (e: any) => {
@@ -161,9 +164,9 @@ export class QuantumExperience {
     if (stepNumber === this.currentStep) return;
     
     // Validate step number
-    if (stepNumber < 1 || stepNumber > 4) {
-      console.warn(`Invalid step number: ${stepNumber}. Valid steps are 1-4.`);
-      if (stepNumber === 5) {
+    if (stepNumber < 1 || stepNumber > 5) {
+      console.warn(`Invalid step number: ${stepNumber}. Valid steps are 1-5.`);
+      if (stepNumber === 6) {
         this.showComingSoonModal();
       }
       return;
@@ -217,8 +220,13 @@ export class QuantumExperience {
         this.step4.show();
         break;
       case 5:
-        console.warn('Step 5 is not implemented yet. Staying on Step 4.');
-        // Show a notification or modal that Step 5 is coming soon
+        console.log('QuantumExperience: Initializing and showing Step 5');
+        this.step5.initialize();
+        this.step5.show();
+        break;
+      case 6:
+        console.warn('Step 6 is not implemented yet. Staying on Step 5.');
+        // Show a notification or modal that Step 6 is coming soon
         this.showComingSoonModal();
         break;
       default:
@@ -240,6 +248,9 @@ export class QuantumExperience {
         break;
       case 4:
         this.step4.hide();
+        break;
+      case 5:
+        this.step5.hide();
         break;
     }
   }
@@ -271,7 +282,7 @@ export class QuantumExperience {
         max-width: 500px;
         box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
       ">
-        <h2 style="color: #39ff14; margin-bottom: 1rem; font-size: 2rem;">STEP_05</h2>
+        <h2 style="color: #39ff14; margin-bottom: 1rem; font-size: 2rem;">STEP_06</h2>
         <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1.1rem;">
           Coming Soon...
         </p>
@@ -316,6 +327,7 @@ export class QuantumExperience {
     this.step2?.destroy();
     this.step3?.destroy();
     this.step4?.destroy();
+    this.step5?.destroy();
   }
 
   public getConfig(): QuantumExperienceConfig {
