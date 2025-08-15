@@ -153,15 +153,15 @@ export class Step2QuantumBasics {
       <div class="text-center">
         <div class="step-progress mb-6">
           <div class="flex justify-center items-center space-x-4">
-            <div class="step-indicator completed">01</div>
+            <div id="step-1" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">01</div>
             <div class="progress-line"></div>
-            <div class="step-indicator active">02</div>
+            <div id="step-2" class="step-indicator active cursor-pointer hover:scale-110 transition-transform">02</div>
             <div class="progress-line"></div>
-            <div class="step-indicator">03</div>
+            <div id="step-3" class="step-indicator cursor-pointer hover:scale-110 transition-transform">03</div>
             <div class="progress-line"></div>
-            <div class="step-indicator">04</div>
+            <div id="step-4" class="step-indicator cursor-pointer hover:scale-110 transition-transform">04</div>
             <div class="progress-line"></div>
-            <div class="step-indicator">05</div>
+            <div id="step-5" class="step-indicator cursor-pointer hover:scale-110 transition-transform">05</div>
           </div>
         </div>
         
@@ -412,6 +412,17 @@ export class Step2QuantumBasics {
   }
 
   private setupEventListeners(): void {
+    // Step indicator navigation
+    for (let i = 1; i <= 5; i++) {
+      const stepIndicator = this.container?.querySelector(`#step-${i}`) as HTMLElement;
+      if (stepIndicator) {
+        stepIndicator.addEventListener('click', () => {
+          console.log(`Step2: Jumping to step ${i}`);
+          this.jumpToStep(i);
+        });
+      }
+    }
+    
     const nextBtn = document.getElementById('next-step');
     const prevBtn = document.getElementById('prev-step');
 
@@ -422,6 +433,11 @@ export class Step2QuantumBasics {
     prevBtn?.addEventListener('click', () => {
       this.onPrevStep();
     });
+  }
+
+  private jumpToStep(stepNumber: number): void {
+    const event = new CustomEvent('stepTransition', { detail: { step: stepNumber } });
+    window.dispatchEvent(event);
   }
 
   private onNextStep(): void {

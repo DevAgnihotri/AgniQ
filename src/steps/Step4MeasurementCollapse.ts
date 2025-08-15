@@ -312,15 +312,15 @@ export class Step4MeasurementCollapse {
       <div class="text-center">
         <div class="step-progress mb-6">
           <div class="flex justify-center items-center space-x-4">
-            <div class="step-indicator completed">01</div>
+            <div id="step-indicator-1" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">01</div>
             <div class="progress-line"></div>
-            <div class="step-indicator completed">02</div>
+            <div id="step-indicator-2" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">02</div>
             <div class="progress-line"></div>
-            <div class="step-indicator completed">03</div>
+            <div id="step-indicator-3" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">03</div>
             <div class="progress-line"></div>
-            <div class="step-indicator active">04</div>
+            <div id="step-indicator-4" class="step-indicator active cursor-pointer hover:scale-110 transition-transform">04</div>
             <div class="progress-line"></div>
-            <div class="step-indicator">05</div>
+            <div id="step-indicator-5" class="step-indicator cursor-pointer hover:scale-110 transition-transform">05</div>
           </div>
         </div>
         
@@ -447,6 +447,22 @@ export class Step4MeasurementCollapse {
 
     zenoBtn?.addEventListener('click', () => this.demonstrateZenoEffect());
     measureDisturbBtn?.addEventListener('click', () => this.demonstrateBackAction());
+
+    // Step indicator navigation
+    console.log('Step4: Setting up step indicator navigation');
+    for (let i = 1; i <= 5; i++) {
+      if (i === 4) continue; // Skip current step
+      const stepIndicator = this.container?.querySelector(`#step-indicator-${i}`) as HTMLElement;
+      if (stepIndicator) {
+        stepIndicator.addEventListener('click', () => {
+          console.log(`Step4: Jumping to step ${i}`);
+          this.jumpToStep(i);
+        });
+        console.log(`Step indicator ${i} found and listener attached`);
+      } else {
+        console.error(`Step indicator ${i} not found!`);
+      }
+    }
 
     // Navigation
     console.log('Step4: Setting up navigation event listeners');
@@ -743,6 +759,11 @@ export class Step4MeasurementCollapse {
 
   private onPrevStep(): void {
     const event = new CustomEvent('stepTransition', { detail: { step: 3 } });
+    window.dispatchEvent(event);
+  }
+
+  private jumpToStep(stepNumber: number): void {
+    const event = new CustomEvent('stepTransition', { detail: { step: stepNumber } });
     window.dispatchEvent(event);
   }
 

@@ -194,15 +194,15 @@ export class Step5QuantumEntanglement {
         <!-- Progress Navigation -->
         <div class="flex justify-center items-center mt-16 mb-8">
           <div class="flex items-center space-x-2">
-            <div class="step-indicator completed">01</div>
+            <div id="step-indicator-1" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">01</div>
             <div class="progress-line"></div>
-            <div class="step-indicator completed">02</div>
+            <div id="step-indicator-2" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">02</div>
             <div class="progress-line"></div>
-            <div class="step-indicator completed">03</div>
+            <div id="step-indicator-3" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">03</div>
             <div class="progress-line"></div>
-            <div class="step-indicator completed">04</div>
+            <div id="step-indicator-4" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">04</div>
             <div class="progress-line"></div>
-            <div class="step-indicator active">05</div>
+            <div id="step-indicator-5" class="step-indicator active">05</div>
           </div>
         </div>
         
@@ -243,6 +243,21 @@ export class Step5QuantumEntanglement {
     createBtn?.addEventListener('click', () => this.createEntanglement());
     measureBtn?.addEventListener('click', () => this.measureQubit());
     resetBtn?.addEventListener('click', () => this.resetQubits());
+
+    // Step indicator navigation
+    console.log('Step5: Setting up step indicator navigation');
+    for (let i = 1; i <= 4; i++) {
+      const stepIndicator = this.container?.querySelector(`#step-indicator-${i}`) as HTMLElement;
+      if (stepIndicator) {
+        stepIndicator.addEventListener('click', () => {
+          console.log(`Step5: Jumping to step ${i}`);
+          this.jumpToStep(i);
+        });
+        console.log(`Step indicator ${i} found and listener attached`);
+      } else {
+        console.error(`Step indicator ${i} not found!`);
+      }
+    }
 
     // Navigation
     console.log('Step5: Setting up navigation event listeners');
@@ -312,6 +327,12 @@ export class Step5QuantumEntanglement {
 
   private showComingSoonAlert(): void {
     alert('Step 6 is coming soon! This concludes the current quantum computing experience.');
+  }
+
+  private jumpToStep(stepNumber: number): void {
+    console.log(`Step5: Jumping to step ${stepNumber}`);
+    const event = new CustomEvent('stepTransition', { detail: { step: stepNumber } });
+    window.dispatchEvent(event);
   }
 
   private onPrevStep(): void {

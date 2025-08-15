@@ -255,15 +255,15 @@ export class Step3BlochSphere {
       <div class="text-center">
         <div class="step-progress mb-6">
           <div class="flex justify-center items-center space-x-4">
-            <div class="step-indicator completed">01</div>
+            <div id="step-1" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">01</div>
             <div class="progress-line"></div>
-            <div class="step-indicator completed">02</div>
+            <div id="step-2" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">02</div>
             <div class="progress-line"></div>
-            <div class="step-indicator active">03</div>
+            <div id="step-3" class="step-indicator active cursor-pointer hover:scale-110 transition-transform">03</div>
             <div class="progress-line"></div>
-            <div class="step-indicator">04</div>
+            <div id="step-4" class="step-indicator cursor-pointer hover:scale-110 transition-transform">04</div>
             <div class="progress-line"></div>
-            <div class="step-indicator">05</div>
+            <div id="step-5" class="step-indicator cursor-pointer hover:scale-110 transition-transform">05</div>
           </div>
         </div>
         
@@ -567,6 +567,18 @@ export class Step3BlochSphere {
 
     // Navigation
     console.log('Step3: Setting up navigation event listeners');
+    
+    // Step indicator navigation
+    for (let i = 1; i <= 5; i++) {
+      const stepIndicator = this.container?.querySelector(`#step-${i}`) as HTMLElement;
+      if (stepIndicator) {
+        stepIndicator.addEventListener('click', () => {
+          console.log(`Step3: Jumping to step ${i}`);
+          this.jumpToStep(i);
+        });
+      }
+    }
+    
     const nextBtn = this.container?.querySelector('#next-step') as HTMLElement;
     const prevBtn = this.container?.querySelector('#prev-step') as HTMLElement;
 
@@ -646,6 +658,11 @@ export class Step3BlochSphere {
     if (statsEl) {
       statsEl.textContent = `1000 measurements: ${count0} zeros, ${1000 - count0} ones (${Math.round(count0/10)}% vs ${Math.round(prob0*100)}% expected)`;
     }
+  }
+
+  private jumpToStep(stepNumber: number): void {
+    const event = new CustomEvent('stepTransition', { detail: { step: stepNumber } });
+    window.dispatchEvent(event);
   }
 
   private onNextStep(): void {
