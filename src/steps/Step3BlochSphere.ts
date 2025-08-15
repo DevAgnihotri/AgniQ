@@ -264,6 +264,8 @@ export class Step3BlochSphere {
             <div id="step-4" class="step-indicator cursor-pointer hover:scale-110 transition-transform">04</div>
             <div class="progress-line"></div>
             <div id="step-5" class="step-indicator cursor-pointer hover:scale-110 transition-transform">05</div>
+            <div class="progress-line"></div>
+            <div id="step-6" class="step-indicator cursor-pointer hover:scale-110 transition-transform">06</div>
           </div>
         </div>
         
@@ -569,7 +571,8 @@ export class Step3BlochSphere {
     console.log('Step3: Setting up navigation event listeners');
     
     // Step indicator navigation
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 6; i++) {
+      if (i === 3) continue; // Skip current step
       const stepIndicator = this.container?.querySelector(`#step-${i}`) as HTMLElement;
       if (stepIndicator) {
         stepIndicator.addEventListener('click', () => {

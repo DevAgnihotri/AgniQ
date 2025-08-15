@@ -203,6 +203,8 @@ export class Step5QuantumEntanglement {
             <div id="step-indicator-4" class="step-indicator completed cursor-pointer hover:scale-110 transition-transform">04</div>
             <div class="progress-line"></div>
             <div id="step-indicator-5" class="step-indicator active">05</div>
+            <div class="progress-line"></div>
+            <div id="step-indicator-6" class="step-indicator cursor-pointer hover:scale-110 transition-transform">06</div>
           </div>
         </div>
         
@@ -211,7 +213,7 @@ export class Step5QuantumEntanglement {
             ← STEP_04
           </button>
           <button id="next-step" class="cyber-btn bg-cyber-pink text-black px-6 py-3 rounded-lg font-bold">
-            COMING_SOON
+            STEP_06: QUANTUM GATES →
           </button>
         </div>
       </div>
@@ -246,7 +248,8 @@ export class Step5QuantumEntanglement {
 
     // Step indicator navigation
     console.log('Step5: Setting up step indicator navigation');
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 6; i++) {
+      if (i === 5) continue; // Skip current step
       const stepIndicator = this.container?.querySelector(`#step-indicator-${i}`) as HTMLElement;
       if (stepIndicator) {
         stepIndicator.addEventListener('click', () => {
@@ -269,8 +272,8 @@ export class Step5QuantumEntanglement {
 
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        console.log('Step5: Next button clicked (Coming Soon)');
-        this.showComingSoonAlert();
+        console.log('Step5: Next button clicked (to Step 6)');
+        this.onNextStep();
       });
     } else {
       console.error('Step5: Next button not found!');
@@ -325,18 +328,20 @@ export class Step5QuantumEntanglement {
     }
   }
 
-  private showComingSoonAlert(): void {
-    alert('Step 6 is coming soon! This concludes the current quantum computing experience.');
-  }
-
-  private jumpToStep(stepNumber: number): void {
-    console.log(`Step5: Jumping to step ${stepNumber}`);
-    const event = new CustomEvent('stepTransition', { detail: { step: stepNumber } });
+  private onNextStep(): void {
+    const event = new CustomEvent('stepTransition', { detail: { step: 6 } });
     window.dispatchEvent(event);
   }
 
   private onPrevStep(): void {
     const event = new CustomEvent('stepTransition', { detail: { step: 4 } });
+    window.dispatchEvent(event);
+  }
+
+  private jumpToStep(stepNumber: number): void {
+    console.log(`Step5: jumpToStep called with stepNumber: ${stepNumber}`);
+    const event = new CustomEvent('stepTransition', { detail: { step: stepNumber } });
+    console.log(`Step5: Dispatching stepTransition event with step: ${stepNumber}`);
     window.dispatchEvent(event);
   }
 

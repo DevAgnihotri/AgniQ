@@ -162,6 +162,8 @@ export class Step2QuantumBasics {
             <div id="step-4" class="step-indicator cursor-pointer hover:scale-110 transition-transform">04</div>
             <div class="progress-line"></div>
             <div id="step-5" class="step-indicator cursor-pointer hover:scale-110 transition-transform">05</div>
+            <div class="progress-line"></div>
+            <div id="step-6" class="step-indicator cursor-pointer hover:scale-110 transition-transform">06</div>
           </div>
         </div>
         
@@ -413,7 +415,8 @@ export class Step2QuantumBasics {
 
   private setupEventListeners(): void {
     // Step indicator navigation
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 6; i++) {
+      if (i === 2) continue; // Skip current step
       const stepIndicator = this.container?.querySelector(`#step-${i}`) as HTMLElement;
       if (stepIndicator) {
         stepIndicator.addEventListener('click', () => {

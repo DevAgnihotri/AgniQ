@@ -321,6 +321,8 @@ export class Step4MeasurementCollapse {
             <div id="step-indicator-4" class="step-indicator active cursor-pointer hover:scale-110 transition-transform">04</div>
             <div class="progress-line"></div>
             <div id="step-indicator-5" class="step-indicator cursor-pointer hover:scale-110 transition-transform">05</div>
+            <div class="progress-line"></div>
+            <div id="step-indicator-6" class="step-indicator cursor-pointer hover:scale-110 transition-transform">06</div>
           </div>
         </div>
         
@@ -450,7 +452,7 @@ export class Step4MeasurementCollapse {
 
     // Step indicator navigation
     console.log('Step4: Setting up step indicator navigation');
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 6; i++) {
       if (i === 4) continue; // Skip current step
       const stepIndicator = this.container?.querySelector(`#step-indicator-${i}`) as HTMLElement;
       if (stepIndicator) {
