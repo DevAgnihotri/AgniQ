@@ -160,9 +160,22 @@ export class QuantumExperience {
   private async transitionToStep(stepNumber: number): Promise<void> {
     if (stepNumber === this.currentStep) return;
     
+    // Validate step number
+    if (stepNumber < 1 || stepNumber > 4) {
+      console.warn(`Invalid step number: ${stepNumber}. Valid steps are 1-4.`);
+      if (stepNumber === 5) {
+        this.showComingSoonModal();
+      }
+      return;
+    }
+    
     try {
+      console.log(`QuantumExperience: Starting transition from step ${this.currentStep} to step ${stepNumber}`);
+      
       // Use step manager to show cyberpunk loading screen
       await this.stepManager.transitionToStep(stepNumber);
+      
+      console.log(`QuantumExperience: Loading screen completed, switching steps`);
       
       // Hide current step
       this.hideCurrentStep();
@@ -171,6 +184,8 @@ export class QuantumExperience {
       this.showStep(stepNumber);
       
       this.currentStep = stepNumber;
+      
+      console.log(`QuantumExperience: Transition to step ${stepNumber} completed`);
     } catch (error) {
       console.error('Step transition failed:', error);
     }
@@ -182,6 +197,7 @@ export class QuantumExperience {
   }
 
   private showStep(stepNumber: number): void {
+    console.log(`QuantumExperience: Showing step ${stepNumber}`);
     switch (stepNumber) {
       case 1:
         this.step1.initialize();
@@ -196,8 +212,14 @@ export class QuantumExperience {
         this.step3.show();
         break;
       case 4:
+        console.log('QuantumExperience: Initializing and showing Step 4');
         this.step4.initialize();
         this.step4.show();
+        break;
+      case 5:
+        console.warn('Step 5 is not implemented yet. Staying on Step 4.');
+        // Show a notification or modal that Step 5 is coming soon
+        this.showComingSoonModal();
         break;
       default:
         console.warn(`Step ${stepNumber} not implemented yet`);
@@ -220,6 +242,68 @@ export class QuantumExperience {
         this.step4.hide();
         break;
     }
+  }
+
+  private showComingSoonModal(): void {
+    // Create a cyberpunk-style modal for "Coming Soon"
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      font-family: 'Orbitron', monospace;
+    `;
+
+    modal.innerHTML = `
+      <div style="
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        border: 2px solid #39ff14;
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        max-width: 500px;
+        box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+      ">
+        <h2 style="color: #39ff14; margin-bottom: 1rem; font-size: 2rem;">STEP_05</h2>
+        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1.1rem;">
+          Coming Soon...
+        </p>
+        <p style="color: #cccccc; margin-bottom: 2rem;">
+          More quantum adventures await! This step is currently under development.
+        </p>
+        <button id="close-modal" style="
+          background: #39ff14;
+          color: #000;
+          border: none;
+          padding: 0.75rem 2rem;
+          font-size: 1rem;
+          font-weight: bold;
+          border-radius: 5px;
+          cursor: pointer;
+          font-family: 'Orbitron', monospace;
+        ">UNDERSTOOD</button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Close modal functionality
+    const closeBtn = modal.querySelector('#close-modal');
+    const closeModal = () => {
+      document.body.removeChild(modal);
+    };
+
+    closeBtn?.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
   }
 
   // Public API methods

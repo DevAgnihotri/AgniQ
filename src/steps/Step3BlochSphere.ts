@@ -566,16 +566,30 @@ export class Step3BlochSphere {
     });
 
     // Navigation
-    const nextBtn = document.getElementById('next-step');
-    const prevBtn = document.getElementById('prev-step');
+    console.log('Step3: Setting up navigation event listeners');
+    const nextBtn = this.container?.querySelector('#next-step') as HTMLElement;
+    const prevBtn = this.container?.querySelector('#prev-step') as HTMLElement;
 
-    nextBtn?.addEventListener('click', () => {
-      this.onNextStep();
-    });
+    console.log('Step3: Next button found:', !!nextBtn);
+    console.log('Step3: Prev button found:', !!prevBtn);
 
-    prevBtn?.addEventListener('click', () => {
-      this.onPrevStep();
-    });
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        console.log('Step3: Next button clicked');
+        this.onNextStep();
+      });
+    } else {
+      console.error('Step3: Next button not found!');
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        console.log('Step3: Prev button clicked');
+        this.onPrevStep();
+      });
+    } else {
+      console.error('Step3: Prev button not found!');
+    }
   }
 
   private applyGate(gate: string): void {
@@ -635,6 +649,7 @@ export class Step3BlochSphere {
   }
 
   private onNextStep(): void {
+    console.log('Step 3: Transitioning to Step 4');
     const event = new CustomEvent('stepTransition', { detail: { step: 4 } });
     window.dispatchEvent(event);
   }

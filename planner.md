@@ -150,7 +150,7 @@ $$
 
 Quantum entanglement happens when particles share the same quantum state, so measuring one instantly affects the other, no matter the distance. You can imagine each particle as creating an invisible field that other particles can “notice” and respond to. This mutual awareness links their behaviors in a way that classical physics cannot explain.
 
-link the button for "Quantum Field Visualization" link qunatum visulaization here ok
+link the button for "Quantum Field Visualization" file as it is ok... 
 
 **Why it’s powerful:**
 

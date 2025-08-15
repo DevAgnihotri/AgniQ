@@ -393,6 +393,7 @@ export class Step4MeasurementCollapse {
   }
 
   public initialize(): void {
+    console.log('Step4MeasurementCollapse: initialize() called');
     if (this.isInitialized) return;
     
     // Add to main app container
@@ -448,11 +449,30 @@ export class Step4MeasurementCollapse {
     measureDisturbBtn?.addEventListener('click', () => this.demonstrateBackAction());
 
     // Navigation
-    const nextBtn = document.getElementById('next-step');
-    const prevBtn = document.getElementById('prev-step');
+    console.log('Step4: Setting up navigation event listeners');
+    const nextBtn = this.container?.querySelector('#next-step') as HTMLElement;
+    const prevBtn = this.container?.querySelector('#prev-step') as HTMLElement;
 
-    nextBtn?.addEventListener('click', () => this.onNextStep());
-    prevBtn?.addEventListener('click', () => this.onPrevStep());
+    console.log('Step4: Next button found:', !!nextBtn);
+    console.log('Step4: Prev button found:', !!prevBtn);
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        console.log('Step4: Next button clicked (to Step 5)');
+        this.onNextStep();
+      });
+    } else {
+      console.error('Step4: Next button not found!');
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        console.log('Step4: Prev button clicked (to Step 3)');
+        this.onPrevStep();
+      });
+    } else {
+      console.error('Step4: Prev button not found!');
+    }
   }
 
   private setupStateControls(): void {
@@ -727,9 +747,13 @@ export class Step4MeasurementCollapse {
   }
 
   public show(): void {
+    console.log('Step4MeasurementCollapse: show() called');
     if (this.container) {
+      console.log('Step4MeasurementCollapse: Showing container');
       this.container.classList.remove('hidden');
       this.container.style.display = 'block';
+    } else {
+      console.error('Step4MeasurementCollapse: Container is null!');
     }
   }
 
