@@ -197,8 +197,231 @@ export class Step1Welcome {
   }
 
   private openTestMode(): void {
-    // Open the test runner in a new tab
-    window.open('./test-runner.html', '_blank');
+    // Create test mode overlay directly in the current page
+    this.createTestModeOverlay();
+  }
+
+  private createTestModeOverlay(): void {
+    // Create test panel overlay
+    const testOverlay = document.createElement('div');
+    testOverlay.id = 'test-mode-overlay';
+    testOverlay.className = `
+      fixed inset-0 z-50 bg-black/90 backdrop-blur-sm 
+      flex items-center justify-center
+    `;
+
+    testOverlay.innerHTML = `
+      <div class="bg-gray-900/95 border border-cyan-400/50 rounded-lg p-6 max-w-2xl w-full mx-4 
+                  shadow-2xl shadow-cyan-400/20">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-cyan-400">🧪 QUANTUM STEP TESTER</h2>
+          <button id="close-test-mode" class="text-red-400 hover:text-red-300 text-2xl font-bold">✕</button>
+        </div>
+
+        <!-- Current Step Display -->
+        <div class="mb-6 text-center">
+          <div class="text-sm text-gray-400 mb-2">CURRENT STEP:</div>
+          <div id="current-step-display" class="text-3xl font-bold text-cyan-400">1</div>
+        </div>
+
+        <!-- Step Navigation Grid -->
+        <div class="grid grid-cols-4 gap-3 mb-6">
+          ${this.createStepButtons()}
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="flex gap-3 mb-6">
+          <button id="prev-step" class="flex-1 px-4 py-3 bg-orange-600/30 hover:bg-orange-600/50 
+                     border border-orange-400/50 rounded text-orange-400 font-bold 
+                     transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            ← PREVIOUS
+          </button>
+          <button id="next-step" class="flex-1 px-4 py-3 bg-cyan-600/30 hover:bg-cyan-600/50 
+                     border border-cyan-400/50 rounded text-cyan-400 font-bold 
+                     transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            NEXT →
+          </button>
+        </div>
+
+        <!-- Status -->
+        <div class="bg-gray-800/50 rounded p-3 mb-4">
+          <div class="text-xs text-gray-400 mb-1">STATUS:</div>
+          <div id="test-status" class="text-sm text-green-400 font-mono">Ready for testing</div>
+        </div>
+
+        <!-- Help -->
+        <div class="text-xs text-gray-500 text-center">
+          Use keyboard: 1-7 for steps | ← → for navigation | ESC to close
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(testOverlay);
+    this.attachTestModeListeners();
+  }
+
+  private createStepButtons(): string {
+    const steps = [
+      { num: 1, name: 'Welcome', color: 'blue' },
+      { num: 2, name: 'Basics', color: 'green' },
+      { num: 3, name: 'Bloch', color: 'purple' },
+      { num: 4, name: 'Measure', color: 'red' },
+      { num: 5, name: 'Entangle', color: 'pink' },
+      { num: 6, name: 'Gates', color: 'indigo' },
+      { num: 7, name: 'Thermo', color: 'orange' }
+    ];
+
+    return steps.map(step => `
+      <button class="test-step-btn px-3 py-3 bg-${step.color}-600/30 hover:bg-${step.color}-600/50 
+                     border border-${step.color}-400/50 rounded text-${step.color}-400 
+                     font-bold text-sm transition-all duration-200 text-center" 
+              data-step="${step.num}">
+        <div class="text-lg">${step.num}</div>
+        <div class="text-xs opacity-75">${step.name}</div>
+      </button>
+    `).join('');
+  }
+
+  private attachTestModeListeners(): void {
+    let currentTestStep = 1;
+
+    // Close button
+    document.getElementById('close-test-mode')?.addEventListener('click', () => {
+      document.getElementById('test-mode-overlay')?.remove();
+    });
+
+    // Step buttons
+    document.querySelectorAll('.test-step-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const stepNum = parseInt((e.currentTarget as HTMLElement).dataset.step!);
+        this.navigateToTestStep(stepNum);
+        currentTestStep = stepNum;
+        this.updateTestDisplay(currentTestStep);
+      });
+    });
+
+    // Previous/Next buttons
+    document.getElementById('prev-step')?.addEventListener('click', () => {
+      if (currentTestStep > 1) {
+        currentTestStep--;
+        this.navigateToTestStep(currentTestStep);
+        this.updateTestDisplay(currentTestStep);
+      }
+    });
+
+    document.getElementById('next-step')?.addEventListener('click', () => {
+      if (currentTestStep < 7) {
+        currentTestStep++;
+        this.navigateToTestStep(currentTestStep);
+        this.updateTestDisplay(currentTestStep);
+      }
+    });
+
+    // Keyboard shortcuts
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        document.getElementById('test-mode-overlay')?.remove();
+        document.removeEventListener('keydown', handleKeyPress);
+        return;
+      }
+
+      if (e.ctrlKey || e.metaKey) return;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          if (currentTestStep > 1) {
+            currentTestStep--;
+            this.navigateToTestStep(currentTestStep);
+            this.updateTestDisplay(currentTestStep);
+          }
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          if (currentTestStep < 7) {
+            currentTestStep++;
+            this.navigateToTestStep(currentTestStep);
+            this.updateTestDisplay(currentTestStep);
+          }
+          break;
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+          e.preventDefault();
+          const stepNum = parseInt(e.key);
+          currentTestStep = stepNum;
+          this.navigateToTestStep(stepNum);
+          this.updateTestDisplay(currentTestStep);
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyPress);
+
+    // ESC to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.getElementById('test-mode-overlay')?.remove();
+      }
+    });
+  }
+
+  private navigateToTestStep(stepNumber: number): void {
+    try {
+      this.updateTestStatus(`Loading Step ${stepNumber}...`, 'loading');
+      
+      // Dispatch step transition event
+      const event = new CustomEvent('stepTransition', { detail: { step: stepNumber } });
+      window.dispatchEvent(event);
+      
+      this.updateTestStatus(`Step ${stepNumber} loaded successfully`, 'success');
+      console.log(`✅ Test Mode: Loaded Step ${stepNumber}`);
+    } catch (error) {
+      this.updateTestStatus(`Error loading Step ${stepNumber}: ${error}`, 'error');
+      console.error(`❌ Test Mode Error:`, error);
+    }
+  }
+
+  private updateTestDisplay(currentStep: number): void {
+    // Update current step display
+    const display = document.getElementById('current-step-display');
+    if (display) {
+      display.textContent = currentStep.toString();
+    }
+
+    // Update button states
+    document.querySelectorAll('.test-step-btn').forEach(btn => {
+      const stepNum = parseInt((btn as HTMLElement).dataset.step!);
+      if (stepNum === currentStep) {
+        btn.classList.add('ring-2', 'ring-white', 'ring-opacity-50');
+      } else {
+        btn.classList.remove('ring-2', 'ring-white', 'ring-opacity-50');
+      }
+    });
+
+    // Update prev/next button states
+    const prevBtn = document.getElementById('prev-step') as HTMLButtonElement;
+    const nextBtn = document.getElementById('next-step') as HTMLButtonElement;
+    
+    if (prevBtn) prevBtn.disabled = currentStep <= 1;
+    if (nextBtn) nextBtn.disabled = currentStep >= 7;
+  }
+
+  private updateTestStatus(message: string, type: 'success' | 'error' | 'loading' = 'success'): void {
+    const statusElement = document.getElementById('test-status');
+    if (statusElement) {
+      statusElement.textContent = message;
+      statusElement.className = `text-sm font-mono ${
+        type === 'success' ? 'text-green-400' :
+        type === 'error' ? 'text-red-400' :
+        'text-yellow-400'
+      }`;
+    }
   }
 
   public show(): void {

@@ -1,4 +1,4 @@
-import { QuantumExperience } from './src/QuantumExperience';
+import { QuantumExperience } from './QuantumExperience';
 
 class QuantumStepTester {
     private quantumExperience!: QuantumExperience;
