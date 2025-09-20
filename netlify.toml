@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = "."
+
+# If you add serverless functions later, uncomment and set the path
+# [functions]
+#   directory = "netlify/functions"
